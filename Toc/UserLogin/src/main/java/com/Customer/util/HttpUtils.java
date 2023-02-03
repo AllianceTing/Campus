@@ -8,12 +8,9 @@ import java.security.cert.X509Certificate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
-
-//import org.apache.commons.lang.StringUtils;
 import com.alibaba.cloud.commons.lang.StringUtils;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -36,12 +33,6 @@ public class HttpUtils {
 
 	/**
 	 * get
-	 *
-	 * @param host
-	 * @param path
-	 * @param method
-	 * @param headers
-	 * @param querys
 	 * @return
 	 * @throws Exception
 	 */

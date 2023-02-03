@@ -1,26 +1,22 @@
-package com.Customer.VO;
+package com.Customer.chains;
 
-import com.Customer.chains.piepleContent;
 import lombok.Getter;
 import lombok.Setter;
 import org.checkerframework.common.value.qual.MinLen;
 
 import javax.validation.constraints.Max;
-import java.io.Serializable;
 
 /**
- * PROJECT_NAME UserVo
+ * PROJECT_NAME UserLoginReuestContent
  *
  * @author Alliance github_https://github.com/AllianceTing
- * DATE 2023/1/29~16:29
+ * DATE 2023/2/2~10:27
  */
 @Getter
 @Setter
-public class UserVo extends piepleContent implements Serializable {
+public class UserLoginReuestContent extends piepleContent {
     private static final long serialVersionUID = 1L;
-    /**
-     *
-     */
+
     @MinLen(2)
     @Max(18)
     private String userAccount;
@@ -28,5 +24,8 @@ public class UserVo extends piepleContent implements Serializable {
     @Max(18)
     private String userPassword;
 
-
+    @Override
+    public String getName() {
+        return this.getClass().getSimpleName() + "Starting Building";
+    }
 }

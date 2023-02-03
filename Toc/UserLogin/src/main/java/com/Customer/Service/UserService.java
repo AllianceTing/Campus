@@ -1,8 +1,9 @@
 package com.Customer.Service;
 
 import com.Customer.PO.User;
+import com.Customer.chains.UserLoginReuestContent;
+import com.Customer.strategy.LoginTypeEnum;
 import com.baomidou.mybatisplus.extension.service.IService;
-import org.springframework.web.bind.annotation.RequestBody;
 
 /**
  * PROJECT_NAME com.Customer.UserService
@@ -15,4 +16,7 @@ public interface UserService extends IService<User> {
     User selectUserByAccount(String userAccount);
 
     User selectUserByEmail(String email);
+
+    Object doUserLogin(UserLoginReuestContent userVo, LoginTypeEnum strategyName);
+
 }
