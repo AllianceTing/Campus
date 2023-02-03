@@ -1,12 +1,7 @@
 package com.Customer.Service.impl;
 
 import com.Customer.Service.RegistryMailService;
-import com.Customer.VO.MailVo;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
-
-import javax.annotation.Resource;
 
 /**
  * PROJECT_NAME RegistryMailServiceimpl

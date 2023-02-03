@@ -25,6 +25,21 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
     @Autowired
     UserMapper userMapper;
 
+    @Override
+    public User selectUserByAccount(String userAccount) {
+        QueryWrapper<User> queryWrapper = new QueryWrapper();
+        queryWrapper.eq("userAccount", userAccount);
+        return userMapper.selectOne(queryWrapper);
+    }
+
+    @Override
+    public User selectUserByEmail(String email) {
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("email", email);
+        return userMapper.selectOne(queryWrapper);
+    }
+
+
     public Object doUserLogin(UserLoginReuestContent userVo, LoginTypeEnum strategyName) {
         boolean flag = strategyContent.getLoginStrategy(strategyName).loginStrategy(userVo);
         if (flag != true) {

@@ -13,6 +13,10 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 
 public interface UserService extends IService<User> {
+    User selectUserByAccount(String userAccount);
+
+    User selectUserByEmail(String email);
+
     Object doUserLogin(UserLoginReuestContent userVo, LoginTypeEnum strategyName);
 
 }
