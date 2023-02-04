@@ -11,10 +11,9 @@ import com.Customer.strategy.LoginTypeEnum;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.Resource;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 
@@ -29,10 +28,11 @@ import javax.validation.constraints.NotEmpty;
 @RequestMapping(value = "/user")
 @RequiredArgsConstructor
 public class UserLogin {
+    @Resource
     UserService userService;
 
     @PostMapping("/login")
-    public Object userLogin(@RequestBody @NotBlank @Validated UserLoginReuestContent userVo, @NotBlank LoginTypeEnum strategyName) {
+    public Object userLogin(@RequestBody @NotBlank @Validated UserLoginReuestContent userVo, @RequestParam @NotBlank LoginTypeEnum strategyName) {
         return userService.doUserLogin(userVo, strategyName);
     }
 

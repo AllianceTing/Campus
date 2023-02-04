@@ -33,6 +33,7 @@ public class loginStrategyByAccount implements loginStrategy {
             if (userServiceOne != null) {
                 return true;
             }
+            //todo register
         }
         return false;
     }

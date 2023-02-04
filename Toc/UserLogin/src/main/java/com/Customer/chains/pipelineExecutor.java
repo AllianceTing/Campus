@@ -19,6 +19,8 @@ import java.util.Objects;
 
 /**
  * 管道执行器
+ *
+ * @author Lenovo
  */
 @Component
 public class pipelineExecutor {
@@ -45,7 +47,6 @@ public class pipelineExecutor {
         Class<? extends piepleContent> dataType = context.getClass();
         // 获取数据处理管道
         List<? extends Contenxthandler<? super piepleContent>> pipeline = pipelineRouteMap.get(dataType);
-
         if (CollectionUtils.isEmpty(pipeline)) {
             logger.error("{} 的管道为空", dataType.getSimpleName());
             return false;
