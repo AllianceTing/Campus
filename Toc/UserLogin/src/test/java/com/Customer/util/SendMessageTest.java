@@ -1,11 +1,16 @@
 package com.Customer.util;
 
+import com.Customer.Exception.BusinessException;
+import com.Customer.PO.User;
+import com.Customer.Service.UserService;
+import com.Customer.chains.UserLoginReuestContent;
+import com.Customer.chains.pipelineExecutor;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import javax.annotation.Resource;
+import javax.mail.MessagingException;
 import java.util.concurrent.ThreadLocalRandom;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -17,9 +22,39 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 @SpringBootTest
 class SendMessageTest {
+    @Resource
+    UserService userService;
+    @Resource
+    pipelineExecutor pipelineExecutor;
+
     @Test
-    void test(){
-        String authCode = String.format("%06d", ThreadLocalRandom.current().nextInt(1000000));
-        SendMessage.Send("18864691986",authCode);
+    void userAccount() {
+        UserLoginReuestContent data = new UserLoginReuestContent();
+        data.setUserAccount("username");
+        data.setEmail("2426446427@qq.com");
+        data.setUserPassword("password");
+
+        if (true) {
+            User retUser = userService.selectUserByEmail(data.getEmail());
+            if (retUser != null) {
+                //如果已经使用邮箱返回账号
+                throw new BusinessException("account is already used by  user", 50400, "Invalid email");
+            }
+            //todo
+            String emailCode = String.format("%06d", ThreadLocalRandom.current().nextInt(1000000));
+            try {
+                SendEmail.sendEmail(data.getEmail(), emailCode);
+            } catch (MessagingException e) {
+                throw new RuntimeException(e);
+            }
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            if (emailCode == data.getEmail()) {
+                System.out.println(emailCode);
+            }
+        }
     }
 }

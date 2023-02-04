@@ -3,7 +3,6 @@ package com.Customer.strategy;
 import com.Customer.chains.UserLoginReuestContent;
 import com.Customer.chains.pipelineExecutor;
 import com.Customer.util.SendMessage;
-import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -25,7 +24,6 @@ public class loginStrategyByMessage implements loginStrategy {
     @Resource
     pipelineExecutor pipelineExecutor;
 
-    @SneakyThrows
     @Override
     public boolean loginStrategy(UserLoginReuestContent data) {
         if (pipelineExecutor.acceptSync(data)) {
@@ -37,7 +35,11 @@ public class loginStrategyByMessage implements loginStrategy {
             session.setAttribute("authCode", authCode);
             session.setMaxInactiveInterval(60 * 5);
             SendMessage.Send(data.getPhoneNumber(), authCode);
-            Thread.sleep(100);
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             if (session.getAttribute("authCode").equals(data.getAuthCode())) {
                 return true;
             }
