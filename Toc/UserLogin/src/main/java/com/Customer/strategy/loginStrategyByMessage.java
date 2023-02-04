@@ -2,9 +2,16 @@ package com.Customer.strategy;
 
 import com.Customer.chains.UserLoginReuestContent;
 import com.Customer.chains.pipelineExecutor;
+import com.Customer.util.SendMessage;
+import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * PROJECT_NAME loginStrategyByWeChat
@@ -18,9 +25,24 @@ public class loginStrategyByMessage implements loginStrategy {
     @Resource
     pipelineExecutor pipelineExecutor;
 
+    @SneakyThrows
     @Override
     public boolean loginStrategy(UserLoginReuestContent data) {
-        return pipelineExecutor.acceptSync(data);
+        if (pipelineExecutor.acceptSync(data)) {
+            ServletRequestAttributes ra = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+            assert ra != null;
+            HttpServletRequest req = ra.getRequest();
+            String authCode = String.format("%06d", ThreadLocalRandom.current().nextInt(1000000));
+            HttpSession session = req.getSession(true);
+            session.setAttribute("authCode", authCode);
+            session.setMaxInactiveInterval(60 * 5);
+            SendMessage.Send(data.getPhoneNumber(), authCode);
+            Thread.sleep(100);
+            if (session.getAttribute("authCode").equals(data.getAuthCode())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
