@@ -1,7 +1,8 @@
 package com.Customer.util;
 
 import javax.mail.*;
-import javax.mail.internet.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import java.util.Properties;
 
 /**
@@ -13,7 +14,7 @@ import java.util.Properties;
  * @Author: 东莞呵呵
  */
 public class SendEmail {
-    public static void sendEmail(String email,String authCode) throws MessagingException {
+    public static void sendEmail(String email, String authCode) throws MessagingException {
         // 创建Properties 类用于记录邮箱的一些属性
         Properties props = new Properties();
         // 表示SMTP发送邮件，必须进行身份验证
@@ -50,12 +51,8 @@ public class SendEmail {
         // 设置邮件标题
         message.setSubject("验证码信息");
         // 设置邮件的内容体
-        message.setContent("验证码："+authCode, "text/html;charset=UTF-8");
+        message.setContent("验证码：" + authCode, "text/html;charset=UTF-8");
         // 最后当然就是发送邮件啦
         Transport.send(message);
-
-
-
-
     }
 }

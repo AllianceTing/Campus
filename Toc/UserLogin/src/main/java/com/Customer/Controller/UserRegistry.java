@@ -1,19 +1,13 @@
 package com.Customer.Controller;
 
 
-
-import com.Customer.Exception.ErrorCode;
 import com.Customer.Exception.ResultUtils;
 import com.Customer.PO.User;
 import com.Customer.Service.UserService;
-import com.Customer.VO.MailVo;
 import com.Customer.util.PasswordStrength;
 import com.Customer.util.SendEmail;
 import com.Customer.util.SendMessage;
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import org.apache.ibatis.annotations.Param;
-import org.checkerframework.checker.units.qual.Length;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -25,16 +19,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
-import java.util.Arrays;
-import java.util.Random;
-import java.util.Stack;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.Semaphore;
 import java.util.concurrent.ThreadLocalRandom;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
-import java.util.function.Function;
 
 /**
  * PROJECT_NAME UserRegistry
@@ -51,6 +36,7 @@ public class UserRegistry {
 
     /**
      * 校验手机号格式并且发送信息验证码。
+     *
      * @param phoneNumber
      * @param req
      * @return
@@ -68,14 +54,15 @@ public class UserRegistry {
             String authCode = String.format("%06d", ThreadLocalRandom.current().nextInt(1000000));
             HttpSession session = req.getSession(true);
             session.setAttribute("authCode", authCode);
-            session.setMaxInactiveInterval(60*5);
-            SendMessage.Send(phoneNumber,authCode);
+            session.setMaxInactiveInterval(60 * 5);
+            SendMessage.Send(phoneNumber, authCode);
             return ResultUtils.success("OK");
         }
     }
 
     /**
      * 校验信息验证码是否正确.
+     *
      * @param phoneNumber
      * @param userAuthCode
      * @param authCode
@@ -86,9 +73,11 @@ public class UserRegistry {
                                  String phoneNumber, @RequestBody @RequestParam("authCode") @NotNull String userAuthCode,
                                  @SessionAttribute(value = "authCode", required = false) String authCode) {
         if (authCode == null) {
+            // TODO Auto-generated method stub
             return ResultUtils.error(50400, "验证码已经失效", "");
         }
         if (!userAuthCode.equals(authCode)) {
+            // todo  method
             return ResultUtils.error(50404, "验证码错误", "");
         }
         // STOPSHIP: 2023/2/2
@@ -96,59 +85,63 @@ public class UserRegistry {
 
     }
 
-    /**】
+    /**
+     * 】
      * 判断账户是否已经使用
+     *
      * @param userAccount
      * @return
      */
     @PostMapping("/register/username")
     public Object userAccount(@RequestBody @NotBlank String userAccount) {
-        String account=userAccount.trim();
-        if(account.length()>18||account.length()<6){
-            ResultUtils.error(50400,"长度不合法","");
+        String account = userAccount.trim();
+        if (account.length() > 18 || account.length() < 6) {
+            ResultUtils.error(50400, "长度不合法", "");
         }
-        User retUser=userService.selectUserByAccount(account);
-        if(retUser!=null){
-            return ResultUtils.error(50401,"该账号已经存在",retUser.getUserAccount());
+        User retUser = userService.selectUserByAccount(account);
+        if (retUser != null) {
+            return ResultUtils.error(50401, "该账号已经存在", retUser.getUserAccount());
         }
         return ResultUtils.success("OK");
     }
 
     /**
      * 校验密码强度
+     *
      * @param password
      * @return
      */
     @PostMapping("/register/password")
-    public Object password(@RequestBody @NotBlank String password){
-        String password1=password.trim();
-        if(password1.length()>18||password1.length()<6){
-            ResultUtils.error(50400,"长度不合法","");
+    public Object password(@RequestBody @NotBlank String password) {
+        String password1 = password.trim();
+        if (password1.length() > 18 || password1.length() < 6) {
+            ResultUtils.error(50400, "长度不合法", "");
         }
-        int strength=PasswordStrength.checkStrength(password1);
+        int strength = PasswordStrength.checkStrength(password1);
         return ResultUtils.success(strength);
     }
 
     /**
      * 发送邮件验证码
+     *
      * @param email
      * @param req
      * @return
      * @throws MessagingException
      */
     @PostMapping("/register/sendUserCode")
-    public Object sendUserCode(@RequestBody @Email(message = "邮箱格式错误") String email,HttpServletRequest req) throws MessagingException {
+    public Object sendUserCode(@RequestBody @Email(message = "邮箱格式错误") String email, HttpServletRequest req) throws MessagingException {
         User retUser = userService.selectUserByEmail(email);
-        if(retUser!=null){
+        if (retUser != null) {
             //如果已经使用邮箱返回账号
-            return ResultUtils.error(50401,"",retUser.getUserAccount());
+            return ResultUtils.error(50401, "", retUser.getUserAccount());
         }
         //todo
         String emailCode = String.format("%06d", ThreadLocalRandom.current().nextInt(1000000));
         HttpSession session = req.getSession(true);
         session.setAttribute("emailCode", emailCode);
-        session.setMaxInactiveInterval(60*5);
-        SendEmail.sendEmail(email,emailCode);
+        session.setMaxInactiveInterval(60 * 5);
+        SendEmail.sendEmail(email, emailCode);
         return ResultUtils.success("OK");
     }
 }

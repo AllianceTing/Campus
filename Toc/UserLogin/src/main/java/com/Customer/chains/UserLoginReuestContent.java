@@ -23,6 +23,13 @@ public class UserLoginReuestContent extends piepleContent {
     @MinLen(2)
     @Max(18)
     private String userPassword;
+    @MinLen(11)
+    @Max(11)
+    private String PhoneNumber;
+
+    private String authCode;
+
+    private String email;
 
     @Override
     public String getName() {
