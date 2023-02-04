@@ -15,7 +15,7 @@ public class ControllerExceptionHandler {
 
     @ExceptionHandler(RespRuntimeException.class)
     @ResponseBody
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ResponseStatus(HttpStatus.CONFLICT)
     public Map<String, Object> handleMyRuntimeException(RespRuntimeException ex) {
         Map<String, Object> result = new Hashtable<>();
         result.put("id", ex.getId());
