@@ -18,7 +18,7 @@
     <name>Campus</name>
     <description>Campus</description>
     <properties>
-        <java.version>17</java.version>
+        <java.version>18</java.version>
         <maven.version>3.8.6</maven.version>
 
     </properties>
@@ -82,10 +82,10 @@
     </dependencyManagement>
     <build>
         <plugins>
-            <plugin>
-                <groupId>org.graalvm.buildtools</groupId>
-                <artifactId>native-maven-plugin</artifactId>
-            </plugin>
+<!--            <plugin>-->
+<!--                <groupId>org.graalvm.buildtools</groupId>-->
+<!--                <artifactId>native-maven-plugin</artifactId>-->
+<!--            </plugin>-->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>

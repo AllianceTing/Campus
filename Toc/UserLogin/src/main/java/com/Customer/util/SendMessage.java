@@ -31,7 +31,6 @@ public class SendMessage {
         querys.put("templateId", "908e94ccf08b4476ba6c876d13f084ad");
         Map<String, String> bodys = new HashMap<String, String>();
 
-
         try {
             /**
              * 重要提示如下:
@@ -48,4 +47,5 @@ public class SendMessage {
             e.printStackTrace();
         }
     }
+
 }
