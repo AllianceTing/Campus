@@ -1,7 +1,7 @@
-package com.Customer.strategy;
+package com.Customer.UserLoginMoudle.strategy;
 
-import com.Customer.chains.UserLoginReuestContent;
-import com.Customer.chains.pipelineExecutor;
+import com.Customer.UserLoginMoudle.PiplineValidate.PipelineExcutor;
+import com.Customer.UserLoginMoudle.PiplineValidate.UserLoginReuestContent;
 import com.Customer.util.SendMessage;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
- * PROJECT_NAME loginStrategyByWeChat
+ * PROJECT_NAME RegistryStrategyByWeChat
  *
  * @author Alliance github_https://github.com/AllianceTing
  * DATE 2023/2/2~12:01
@@ -22,9 +22,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class loginStrategyByMessage implements loginStrategy {
 
     @Resource
-    pipelineExecutor pipelineExecutor;
-    @Resource
-    SendMessage sendMessage;
+    PipelineExcutor pipelineExecutor;
 
     @Override
     public boolean loginStrategy(UserLoginReuestContent data) {
@@ -36,7 +34,7 @@ public class loginStrategyByMessage implements loginStrategy {
             HttpSession session = req.getSession(true);
             session.setAttribute("authCode", authCode);
             session.setMaxInactiveInterval(60 * 5);
-            sendMessage.Send(data.getPhoneNumber(), authCode);
+            SendMessage.Send(data.getPhoneNumber(), authCode);
             try {
                 Thread.sleep(100);
             } catch (InterruptedException e) {

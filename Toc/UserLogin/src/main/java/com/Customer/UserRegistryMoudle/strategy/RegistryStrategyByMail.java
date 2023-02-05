@@ -1,8 +1,7 @@
-package com.Customer.strategy;
+package com.Customer.UserRegistryMoudle.strategy;
 
-import com.Customer.Service.UserService;
-import com.Customer.chains.UserLoginReuestContent;
-import com.Customer.chains.pipelineExecutor;
+import com.Customer.UserRegistryMoudle.PiplineValidate.RegistryPipelineExcutor;
+import com.Customer.UserRegistryMoudle.PiplineValidate.UserRegistryRequestContent;
 import com.Customer.util.SendEmail;
 import org.springframework.stereotype.Service;
 
@@ -11,28 +10,24 @@ import javax.mail.MessagingException;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
- * PROJECT_NAME loginStrategyByWeChat
+ * PROJECT_NAME RegistryStrategyByWeChat
  *
  * @author Alliance github_https://github.com/AllianceTing
  * DATE 2023/2/2~12:01
  */
 @Service
-public class loginStrategyByMail implements loginStrategy {
+public class RegistryStrategyByMail implements RegistryStrategy {
     @Resource
-    pipelineExecutor pipelineExecutor;
-    @Resource
-    UserService userService;
-    @Resource
-    SendEmail sendEmail;
+    RegistryPipelineExcutor pipelineExecutor;
 
     @Override
-    public boolean loginStrategy(UserLoginReuestContent data) {
+    public boolean loginStrategy(UserRegistryRequestContent data) {
         // todo 接口复用性太低 需要升级 -- > USerRegistryByMail
         if (pipelineExecutor.acceptSync(data)) {
             //todo
             String emailCode = String.format("%06d", ThreadLocalRandom.current().nextInt(1000000));
             try {
-                boolean flag = sendEmail.sendEmail(data.getEmail(), emailCode);
+                SendEmail.sendEmail(data.getEmail(), emailCode);
             } catch (MessagingException e) {
                 throw new RuntimeException(e);
             }
@@ -50,7 +45,7 @@ public class loginStrategyByMail implements loginStrategy {
     }
 
     @Override
-    public LoginTypeEnum getloginType() {
-        return LoginTypeEnum.MailLogin;
+    public RegistryTypeEnum getloginType() {
+        return RegistryTypeEnum.MailRegistry;
     }
 }

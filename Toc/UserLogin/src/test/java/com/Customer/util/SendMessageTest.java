@@ -3,8 +3,8 @@ package com.Customer.util;
 import com.Customer.Exception.BusinessException;
 import com.Customer.PO.User;
 import com.Customer.Service.UserService;
-import com.Customer.chains.UserLoginReuestContent;
-import com.Customer.chains.pipelineExecutor;
+import com.Customer.UserLoginMoudle.PiplineValidate.PipelineExcutor;
+import com.Customer.UserLoginMoudle.PiplineValidate.UserLoginReuestContent;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -25,9 +25,7 @@ class SendMessageTest {
     @Resource
     UserService userService;
     @Resource
-    pipelineExecutor pipelineExecutor;
-    @Resource
-    SendEmail sendEmail;
+    PipelineExcutor pipelineExecutor;
 
     @Test
     void userAccount() {
@@ -45,7 +43,7 @@ class SendMessageTest {
             //todo
             String emailCode = String.format("%06d", ThreadLocalRandom.current().nextInt(1000000));
             try {
-                sendEmail.sendEmail(data.getEmail(), emailCode);
+                SendEmail.sendEmail(data.getEmail(), emailCode);
             } catch (MessagingException e) {
                 throw new RuntimeException(e);
             }

@@ -1,38 +1,32 @@
-package com.Customer.chains;
+package com.Customer.UserLoginMoudle.PiplineValidate;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.checkerframework.common.value.qual.MinLen;
 
-import javax.validation.constraints.Max;
+import java.io.Serializable;
+
 
 /**
- * PROJECT_NAME UserLoginReuestContent
+ * PROJECT_NAME UserRegistryRequestContent
  *
  * @author Alliance github_https://github.com/AllianceTing
  * DATE 2023/2/2~10:27
  */
 @Getter
 @Setter
-public class UserLoginReuestContent extends piepleContent {
+public class UserLoginReuestContent extends PiepleContent implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    @MinLen(2)
-    @Max(18)
     private String userAccount;
-    @MinLen(2)
-    @Max(18)
     private String userPassword;
-    @MinLen(11)
-    @Max(11)
     private String PhoneNumber;
-
     private String authCode;
-
     private String email;
+    private String emailCode;
+
 
     @Override
     public String getName() {
-        return this.getClass().getSimpleName() + "Starting Building";
+        return "Starting Building Pipeline Validate" + this.getClass().getSimpleName();
     }
 }
