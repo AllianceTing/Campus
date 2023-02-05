@@ -1,10 +1,11 @@
-package com.Customer.chains;
+package com.Customer.UserRegistryMoudle.PiplineValidate;
 
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -17,23 +18,23 @@ import java.util.stream.Collectors;
  * @author AllianceTing
  */
 @Configuration
-public class PipelineRouteConfig implements ApplicationContextAware {
+public class RegistryPipelineRouteConfig implements ApplicationContextAware {
 
     /**
      * 数据类型->管道中处理器类型列表 的路由
      */
     private static final
-    Map<Class<? extends piepleContent>,
-            List<Class<? extends Contenxthandler<? extends piepleContent>>>> PIPELINE_ROUTE_MAP = new HashMap<>(4);
+    Map<Class<? extends RegistryPiepleContent>,
+            List<Class<? extends RegistryContenxthandler<? extends RegistryPiepleContent>>>> RegistryPIPELINE_ROUTE_MAP = new HashMap<>(4);
 
     /*
      * 在这里配置各种上下文类型对应的处理管道：键为上下文类型，值为处理器类型的列表
      */
     static {
-        PIPELINE_ROUTE_MAP.put(piepleContent.class,
+        RegistryPIPELINE_ROUTE_MAP.put(UserRegistryRequestContent.class,
                 Arrays.asList(
-                        piepleContentDataPreChecker.class,
-                        piepleContentValidatePreChecker.class
+                        RegistryPiepleContentDataPreChecker.class,
+                        RegistryPiepleContentValidatePreChecker.class
                 ));
 
     }
@@ -42,18 +43,18 @@ public class PipelineRouteConfig implements ApplicationContextAware {
      * 在 Spring Start -- >  路由表生成对应的管道 链
      * PipelineExecutor 从这里获取处理器列表
      */
-    @Bean("pipelineRouteMap")
-    public Map<Class<? extends piepleContent>, List<? extends Contenxthandler<? extends piepleContent>>> getHandlerPipelineMap() {
-        return PIPELINE_ROUTE_MAP.entrySet()
+    @Bean("RegistrypipelineRouteMap")
+    public Map<Class<? extends RegistryPiepleContent>, List<? extends RegistryContenxthandler<? extends RegistryPiepleContent>>> getHandlerPipelineMap() {
+        return RegistryPIPELINE_ROUTE_MAP.entrySet()
                 .stream()
                 .collect(Collectors.toMap(Map.Entry::getKey, this::toPipeline));
     }
 
     /**
-     * 根据给定的管道中 Contenxthandler 的类型的列表，构建管道
+     * 根据给定的管道中 RegistryContenxthandler 的类型的列表，构建管道
      */
-    private List<? extends Contenxthandler<? extends piepleContent>> toPipeline(
-            Map.Entry<Class<? extends piepleContent>, List<Class<? extends Contenxthandler<? extends piepleContent>>>> entry) {
+    private List<? extends RegistryContenxthandler<? extends RegistryPiepleContent>> toPipeline(
+            Map.Entry<Class<? extends RegistryPiepleContent>, List<Class<? extends RegistryContenxthandler<? extends RegistryPiepleContent>>>> entry) {
         return entry.getValue()
                 .stream()
                 .map(appContext::getBean)

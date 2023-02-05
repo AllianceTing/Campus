@@ -1,13 +1,10 @@
 package com.Customer.util;
 
+import com.Customer.UserLoginMoudle.PiplineValidate.PipelineExcutor;
+import com.Customer.UserLoginMoudle.PiplineValidate.UserLoginReuestContent;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import javax.mail.MessagingException;
-
-import java.util.concurrent.ThreadLocalRandom;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -19,11 +16,15 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 @SpringBootTest
 class SendEmailTest {
+    @Autowired
+    PipelineExcutor Pipelin;
 
     @Test
-    void test() throws MessagingException {
-        String emailCode = String.format("%06d", ThreadLocalRandom.current().nextInt(1000000));
-        SendEmail.sendEmail("1940844289@qq.com",emailCode);
-
+    void test() {
+        UserLoginReuestContent user = new UserLoginReuestContent();
+        user.setUserAccount("username");
+        user.setUserPassword("password");
+        user.setEmail("2426446427@qq.com");
+        Pipelin.acceptSync(user);
     }
 }

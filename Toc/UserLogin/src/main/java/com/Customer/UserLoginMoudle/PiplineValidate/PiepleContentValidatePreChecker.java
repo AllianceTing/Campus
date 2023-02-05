@@ -1,24 +1,23 @@
-package com.Customer.chains;
+package com.Customer.UserLoginMoudle.PiplineValidate;
 
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import java.util.LinkedList;
 import java.util.List;
 
 /**
- * PROJECT_NAME piepleContentValidatePreChecker
+ * PROJECT_NAME RegistryPiepleContentValidatePreChecker
  *
  * @author Alliance github_https://github.com/AllianceTing
  * DATE 2023/2/2~10:34
  */
-@Service
+
 @Component
-public class piepleContentValidatePreChecker implements Contenxthandler<UserLoginReuestContent> {
+public class PiepleContentValidatePreChecker implements Contenxthandler<UserLoginReuestContent> {
     // todo: implements huge number of sensitive word checking
 
     /**
-     * @param context - > piepleContent
+     * @param context - > RegistryPiepleContent
      * @return Boolean ? else
      */
     @Override
