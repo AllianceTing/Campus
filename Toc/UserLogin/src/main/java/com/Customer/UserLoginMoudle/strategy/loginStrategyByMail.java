@@ -1,14 +1,17 @@
 package com.Customer.UserLoginMoudle.strategy;
 
+import com.Customer.PO.User;
 import com.Customer.Service.UserService;
 import com.Customer.UserLoginMoudle.PiplineValidate.PipelineExcutor;
 import com.Customer.UserLoginMoudle.PiplineValidate.UserLoginReuestContent;
-import com.Customer.util.SendEmail;
+import com.Customer.util.SendMessage;
+import com.Customer.util.kaotchaUtils;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import javax.mail.MessagingException;
-import java.util.concurrent.ThreadLocalRandom;
+import java.io.IOException;
+
 
 /**
  * PROJECT_NAME RegistryStrategyByWeChat
@@ -25,26 +28,23 @@ public class loginStrategyByMail implements loginStrategy {
 
     @Override
     public boolean loginStrategy(UserLoginReuestContent data) {
-        // todo 接口复用性太低 需要升级 -- > USerRegistryByMail
-        if (pipelineExecutor.acceptSync(data)) {
-            //todo
-            String emailCode = String.format("%06d", ThreadLocalRandom.current().nextInt(1000000));
-            try {
-                SendEmail.sendEmail(data.getEmail(), emailCode);
-            } catch (MessagingException e) {
-                throw new RuntimeException(e);
-            }
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-            if (emailCode == data.getEmail()) {
+        kaotchaUtils kaotchaUtils = new kaotchaUtils();
+        String TextCode = "";
+        try {
+            TextCode = kaotchaUtils.captchaCodeCreator();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        SendMessage.Send(data.getEmail(), TextCode);
+        QueryWrapper<User> query = new QueryWrapper<User>();
+        query.eq("email", data.getEmail());
+        User userServiceOne = userService.getOne(query);
+        if (userServiceOne != null) {
+            if (data.getEmailCode() == TextCode) {
                 return true;
             }
         }
         return false;
-
     }
 
     @Override
