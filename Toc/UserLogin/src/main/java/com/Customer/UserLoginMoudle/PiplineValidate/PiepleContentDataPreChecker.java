@@ -1,27 +1,20 @@
-package com.Customer.chains;
+package com.Customer.UserLoginMoudle.PiplineValidate;
 
 import com.Customer.Exception.BusinessException;
 import com.Customer.Exception.ErrorCode;
-import com.Customer.Service.UserService;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
-
-import javax.annotation.Resource;
 
 /**
- * PROJECT_NAME piepleContentDataPreChecker
+ * PROJECT_NAME RegistryPiepleContentDataPreChecker
  *
  * @author Alliance github_https://github.com/AllianceTing
  * DATE 2023/2/2~10:25
  */
-@Service
 @Component
-public class piepleContentDataPreChecker implements Contenxthandler<UserLoginReuestContent> {
-    @Resource
-    UserService userService;
+public class PiepleContentDataPreChecker implements Contenxthandler<UserLoginReuestContent> {
 
     /**
-     * @param userVo - > piepleContent
+     * @param userVo - > RegistryPiepleContent
      * @return Boolean ? else
      */
     @Override

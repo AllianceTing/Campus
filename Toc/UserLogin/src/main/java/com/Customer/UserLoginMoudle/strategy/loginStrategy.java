@@ -1,9 +1,9 @@
-package com.Customer.strategy;
+package com.Customer.UserLoginMoudle.strategy;
 
-import com.Customer.chains.UserLoginReuestContent;
+import com.Customer.UserLoginMoudle.PiplineValidate.UserLoginReuestContent;
 
 /**
- * PROJECT_NAME loginStrategy
+ * PROJECT_NAME RegistryStrategy
  *
  * @author Alliance github_https://github.com/AllianceTing
  * DATE 2023/2/2~11:59

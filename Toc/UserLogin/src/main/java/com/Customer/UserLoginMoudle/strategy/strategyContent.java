@@ -1,11 +1,12 @@
-package com.Customer.strategy;
+package com.Customer.UserLoginMoudle.strategy;
 
 import org.springframework.stereotype.Service;
+
 import java.util.HashMap;
 import java.util.Map;
 
 /**
- * PROJECT_NAME strategyContent
+ * PROJECT_NAME RegistrystrategyContent
  *
  * @author Alliance github_https://github.com/AllianceTing
  * DATE 2023/2/2~12:03

@@ -1,8 +1,8 @@
 package com.Customer.Service;
 
 import com.Customer.PO.User;
-import com.Customer.chains.UserLoginReuestContent;
-import com.Customer.strategy.LoginTypeEnum;
+import com.Customer.UserLoginMoudle.PiplineValidate.UserLoginReuestContent;
+import com.Customer.UserLoginMoudle.strategy.LoginTypeEnum;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
