@@ -1,6 +1,6 @@
 package com.Customer.VO;
 
-import com.Customer.PiplineValidate.PiepleContent;
+import com.Customer.UserLoginMoudle.PiplineValidate.PiepleContent;
 import lombok.Getter;
 import lombok.Setter;
 import org.checkerframework.common.value.qual.MinLen;

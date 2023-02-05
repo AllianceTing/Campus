@@ -1,7 +1,7 @@
-package com.Customer.strategy;
+package com.Customer.UserLoginMoudle.strategy;
 
-import com.Customer.PiplineValidate.PipelineExecutor;
-import com.Customer.PiplineValidate.UserLoginReuestContent;
+import com.Customer.UserLoginMoudle.PiplineValidate.PipelineExcutor;
+import com.Customer.UserLoginMoudle.PiplineValidate.UserLoginReuestContent;
 import com.Customer.util.SendMessage;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
- * PROJECT_NAME loginStrategyByWeChat
+ * PROJECT_NAME RegistryStrategyByWeChat
  *
  * @author Alliance github_https://github.com/AllianceTing
  * DATE 2023/2/2~12:01
@@ -22,7 +22,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class loginStrategyByMessage implements loginStrategy {
 
     @Resource
-    PipelineExecutor pipelineExecutor;
+    PipelineExcutor pipelineExecutor;
 
     @Override
     public boolean loginStrategy(UserLoginReuestContent data) {

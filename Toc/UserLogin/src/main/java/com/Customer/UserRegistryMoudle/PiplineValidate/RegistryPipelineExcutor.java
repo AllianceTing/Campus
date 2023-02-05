@@ -1,4 +1,4 @@
-package com.Customer.PiplineValidate;
+package com.Customer.UserRegistryMoudle.PiplineValidate;
 
 import com.alibaba.nacos.client.naming.utils.CollectionUtils;
 import org.slf4j.Logger;
@@ -11,19 +11,13 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
- * PROJECT_NAME PipelineExecutor
+ * PROJECT_NAME PipelineExcutor
  *
  * @author Alliance github_https://github.com/AllianceTing
- * DATE 2023/2/2~10:57
- */
-
-/**
- * 管道执行器
- *
- * @author Lenovo
+ * DATE 2023/2/5~15:34
  */
 @Component
-public class PipelineExecutor {
+public class RegistryPipelineExcutor {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -31,8 +25,8 @@ public class PipelineExecutor {
      * 引用 PipelineRouteConfig 中的 pipelineRouteMap
      */
     @Resource
-    private Map<Class<? extends PiepleContent>,
-            List<? extends Contenxthandler<? super PiepleContent>>> pipelineRouteMap;
+    private Map<Class<? extends RegistryPiepleContent>,
+            List<? extends RegistryContenxthandler<? super RegistryPiepleContent>>> pipelineRouteMap;
 
     /**
      * 同步处理输入的上下文数据<br/>
@@ -41,16 +35,13 @@ public class PipelineExecutor {
      * @param context 输入的上下文数据
      * @return 处理过程中管道是否畅通，畅通返回 true，不畅通返回 false
      */
-    public boolean acceptSync(PiepleContent context) {
-        System.out.println(context);
-        logger.error("输出PiepleContent", context);
+    public boolean acceptSync(RegistryPiepleContent context) {
         Objects.requireNonNull(context, "上下文数据不能为 null");
         // 拿到数据类型
-        Class<? extends PiepleContent> dataType = context.getClass();
-        logger.error("输出PiepleDatatype", dataType);
+        Class<? extends RegistryPiepleContent> dataType = context.getClass();
         // 获取数据处理管道
-        List<? extends Contenxthandler<? super PiepleContent>> pipeline = pipelineRouteMap.get(dataType);
-        System.out.println(pipeline);
+        List<? extends RegistryContenxthandler<? super RegistryPiepleContent>> pipeline = pipelineRouteMap.get(dataType);
+
         if (CollectionUtils.isEmpty(pipeline)) {
             logger.error("{} 的管道为空", dataType.getSimpleName());
             return false;
@@ -59,7 +50,7 @@ public class PipelineExecutor {
         // 管道是否畅通
         boolean lastSuccess = true;
 
-        for (Contenxthandler<? super PiepleContent> handler : pipeline) {
+        for (RegistryContenxthandler<? super RegistryPiepleContent> handler : pipeline) {
             try {
                 // 当前处理器处理数据，并返回是否继续向下处理
                 lastSuccess = handler.handle(context);
@@ -77,3 +68,4 @@ public class PipelineExecutor {
         return lastSuccess;
     }
 }
+

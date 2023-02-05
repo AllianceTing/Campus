@@ -1,7 +1,8 @@
 package com.Customer.util;
 
-import com.Customer.PiplineValidate.PipelineExecutor;
-import com.Customer.PiplineValidate.UserLoginReuestContent;
+
+import com.Customer.UserLoginMoudle.PiplineValidate.PipelineExcutor;
+import com.Customer.UserLoginMoudle.PiplineValidate.UserLoginReuestContent;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -17,7 +18,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class SendEmailTest {
     @Autowired
-    PipelineExecutor Pipelin;
+    PipelineExcutor Pipelin;
 
     @Test
     void test() {

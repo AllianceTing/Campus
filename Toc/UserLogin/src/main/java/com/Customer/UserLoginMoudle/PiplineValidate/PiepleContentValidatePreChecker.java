@@ -1,4 +1,4 @@
-package com.Customer.PiplineValidate;
+package com.Customer.UserLoginMoudle.PiplineValidate;
 
 import org.springframework.stereotype.Component;
 
@@ -6,7 +6,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * PROJECT_NAME PiepleContentValidatePreChecker
+ * PROJECT_NAME RegistryPiepleContentValidatePreChecker
  *
  * @author Alliance github_https://github.com/AllianceTing
  * DATE 2023/2/2~10:34
@@ -17,7 +17,7 @@ public class PiepleContentValidatePreChecker implements Contenxthandler<UserLogi
     // todo: implements huge number of sensitive word checking
 
     /**
-     * @param context - > PiepleContent
+     * @param context - > RegistryPiepleContent
      * @return Boolean ? else
      */
     @Override

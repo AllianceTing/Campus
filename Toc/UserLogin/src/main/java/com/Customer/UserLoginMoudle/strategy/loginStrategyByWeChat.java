@@ -1,14 +1,14 @@
-package com.Customer.strategy;
+package com.Customer.UserLoginMoudle.strategy;
 
-import com.Customer.PiplineValidate.PipelineExecutor;
-import com.Customer.PiplineValidate.UserLoginReuestContent;
 import com.Customer.Service.UserService;
+import com.Customer.UserLoginMoudle.PiplineValidate.PipelineExcutor;
+import com.Customer.UserLoginMoudle.PiplineValidate.UserLoginReuestContent;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 
 /**
- * PROJECT_NAME loginStrategyByWeChat
+ * PROJECT_NAME RegistryStrategyByWeChat
  *
  * @author Alliance github_https://github.com/AllianceTing
  * DATE 2023/2/2~12:01
@@ -17,7 +17,7 @@ import javax.annotation.Resource;
 public class loginStrategyByWeChat implements loginStrategy {
 
     @Resource
-    PipelineExecutor pipelineExecutor;
+    PipelineExcutor pipelineExecutor;
     @Resource
     UserService userService;
 

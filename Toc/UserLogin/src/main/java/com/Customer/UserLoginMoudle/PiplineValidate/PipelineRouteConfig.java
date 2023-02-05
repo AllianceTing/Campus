@@ -1,4 +1,4 @@
-package com.Customer.PiplineValidate;
+package com.Customer.UserLoginMoudle.PiplineValidate;
 
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
@@ -51,7 +51,7 @@ public class PipelineRouteConfig implements ApplicationContextAware {
     }
 
     /**
-     * 根据给定的管道中 Contenxthandler 的类型的列表，构建管道
+     * 根据给定的管道中 RegistryContenxthandler 的类型的列表，构建管道
      */
     private List<? extends Contenxthandler<? extends PiepleContent>> toPipeline(
             Map.Entry<Class<? extends PiepleContent>, List<Class<? extends Contenxthandler<? extends PiepleContent>>>> entry) {
