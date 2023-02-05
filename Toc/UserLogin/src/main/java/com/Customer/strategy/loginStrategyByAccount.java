@@ -1,9 +1,9 @@
 package com.Customer.strategy;
 
 import com.Customer.PO.User;
+import com.Customer.PiplineValidate.PipelineExecutor;
+import com.Customer.PiplineValidate.UserLoginReuestContent;
 import com.Customer.Service.UserService;
-import com.Customer.chains.UserLoginReuestContent;
-import com.Customer.chains.pipelineExecutor;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +19,7 @@ import javax.annotation.Resource;
 public class loginStrategyByAccount implements loginStrategy {
 
     @Resource
-    pipelineExecutor pipelineExecutor;
+    PipelineExecutor pipelineExecutor;
     @Resource
     UserService userService;
 

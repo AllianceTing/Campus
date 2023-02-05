@@ -1,7 +1,7 @@
 package com.Customer.strategy;
 
-import com.Customer.chains.UserLoginReuestContent;
-import com.Customer.chains.pipelineExecutor;
+import com.Customer.PiplineValidate.PipelineExecutor;
+import com.Customer.PiplineValidate.UserLoginReuestContent;
 import com.Customer.util.SendMessage;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -22,7 +22,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class loginStrategyByMessage implements loginStrategy {
 
     @Resource
-    pipelineExecutor pipelineExecutor;
+    PipelineExecutor pipelineExecutor;
 
     @Override
     public boolean loginStrategy(UserLoginReuestContent data) {

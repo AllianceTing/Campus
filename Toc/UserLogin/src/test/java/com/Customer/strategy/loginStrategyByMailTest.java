@@ -1,8 +1,9 @@
 package com.Customer.strategy;
 
 import com.Customer.PO.User;
+import com.Customer.PiplineValidate.PipelineExecutor;
+import com.Customer.PiplineValidate.UserLoginReuestContent;
 import com.Customer.Service.UserService;
-import com.Customer.chains.UserLoginReuestContent;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,7 +18,7 @@ import static org.mockito.Mockito.*;
 
 class loginStrategyByMailTest {
     @Mock
-    com.Customer.chains.pipelineExecutor pipelineExecutor;
+    PipelineExecutor pipelineExecutor;
     @Mock
     UserService userService;
     @InjectMocks

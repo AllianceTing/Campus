@@ -1,10 +1,8 @@
-package com.Customer.chains;
+package com.Customer.PiplineValidate;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.checkerframework.common.value.qual.MinLen;
 
-import javax.validation.constraints.Max;
 
 /**
  * PROJECT_NAME UserLoginReuestContent
@@ -14,25 +12,18 @@ import javax.validation.constraints.Max;
  */
 @Getter
 @Setter
-public class UserLoginReuestContent extends piepleContent {
+public class UserLoginReuestContent extends PiepleContent {
     private static final long serialVersionUID = 1L;
 
-    @MinLen(2)
-    @Max(18)
     private String userAccount;
-    @MinLen(2)
-    @Max(18)
     private String userPassword;
-    @MinLen(11)
-    @Max(11)
     private String PhoneNumber;
-
     private String authCode;
 
     private String email;
 
     @Override
     public String getName() {
-        return this.getClass().getSimpleName() + "Starting Building";
+        return "Starting Building";
     }
 }

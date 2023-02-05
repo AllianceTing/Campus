@@ -1,8 +1,8 @@
 package com.Customer.strategy;
 
+import com.Customer.PiplineValidate.PipelineExecutor;
+import com.Customer.PiplineValidate.UserLoginReuestContent;
 import com.Customer.Service.UserService;
-import com.Customer.chains.UserLoginReuestContent;
-import com.Customer.chains.pipelineExecutor;
 import com.Customer.util.SendEmail;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +19,7 @@ import java.util.concurrent.ThreadLocalRandom;
 @Service
 public class loginStrategyByMail implements loginStrategy {
     @Resource
-    pipelineExecutor pipelineExecutor;
+    PipelineExecutor pipelineExecutor;
     @Resource
     UserService userService;
 

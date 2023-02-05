@@ -1,6 +1,6 @@
 package com.Customer.strategy;
 
-import com.Customer.chains.UserLoginReuestContent;
+import com.Customer.PiplineValidate.UserLoginReuestContent;
 
 /**
  * PROJECT_NAME loginStrategy
