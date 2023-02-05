@@ -3,7 +3,7 @@ package com.Customer.util;
 import com.Customer.Exception.BusinessException;
 import com.Customer.PO.User;
 import com.Customer.Service.UserService;
-import com.Customer.UserLoginMoudle.PiplineValidate.PipelineExecutor;
+import com.Customer.UserLoginMoudle.PiplineValidate.PipelineExcutor;
 import com.Customer.UserLoginMoudle.PiplineValidate.UserLoginReuestContent;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -25,7 +25,7 @@ class SendMessageTest {
     @Resource
     UserService userService;
     @Resource
-    PipelineExecutor pipelineExecutor;
+    PipelineExcutor pipelineExecutor;
 
     @Test
     void userAccount() {

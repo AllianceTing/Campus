@@ -26,7 +26,7 @@ public class RegistryPipelineExcutor {
      */
     @Resource
     private Map<Class<? extends RegistryPiepleContent>,
-            List<? extends RegistryContenxthandler<? super RegistryPiepleContent>>> pipelineRouteMap;
+            List<? extends RegistryContenxthandler<? super RegistryPiepleContent>>> RegistrypipelineRouteMap;
 
     /**
      * 同步处理输入的上下文数据<br/>
@@ -40,7 +40,7 @@ public class RegistryPipelineExcutor {
         // 拿到数据类型
         Class<? extends RegistryPiepleContent> dataType = context.getClass();
         // 获取数据处理管道
-        List<? extends RegistryContenxthandler<? super RegistryPiepleContent>> pipeline = pipelineRouteMap.get(dataType);
+        List<? extends RegistryContenxthandler<? super RegistryPiepleContent>> pipeline = RegistrypipelineRouteMap.get(dataType);
 
         if (CollectionUtils.isEmpty(pipeline)) {
             logger.error("{} 的管道为空", dataType.getSimpleName());

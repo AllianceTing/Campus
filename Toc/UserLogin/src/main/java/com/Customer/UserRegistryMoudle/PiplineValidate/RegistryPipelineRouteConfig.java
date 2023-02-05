@@ -25,13 +25,13 @@ public class RegistryPipelineRouteConfig implements ApplicationContextAware {
      */
     private static final
     Map<Class<? extends RegistryPiepleContent>,
-            List<Class<? extends RegistryContenxthandler<? extends RegistryPiepleContent>>>> PIPELINE_ROUTE_MAP = new HashMap<>(4);
+            List<Class<? extends RegistryContenxthandler<? extends RegistryPiepleContent>>>> RegistryPIPELINE_ROUTE_MAP = new HashMap<>(4);
 
     /*
      * 在这里配置各种上下文类型对应的处理管道：键为上下文类型，值为处理器类型的列表
      */
     static {
-        PIPELINE_ROUTE_MAP.put(UserRegistryRequestContent.class,
+        RegistryPIPELINE_ROUTE_MAP.put(UserRegistryRequestContent.class,
                 Arrays.asList(
                         RegistryPiepleContentDataPreChecker.class,
                         RegistryPiepleContentValidatePreChecker.class
@@ -43,9 +43,9 @@ public class RegistryPipelineRouteConfig implements ApplicationContextAware {
      * 在 Spring Start -- >  路由表生成对应的管道 链
      * PipelineExecutor 从这里获取处理器列表
      */
-    @Bean("pipelineRouteMap")
+    @Bean("RegistrypipelineRouteMap")
     public Map<Class<? extends RegistryPiepleContent>, List<? extends RegistryContenxthandler<? extends RegistryPiepleContent>>> getHandlerPipelineMap() {
-        return PIPELINE_ROUTE_MAP.entrySet()
+        return RegistryPIPELINE_ROUTE_MAP.entrySet()
                 .stream()
                 .collect(Collectors.toMap(Map.Entry::getKey, this::toPipeline));
     }

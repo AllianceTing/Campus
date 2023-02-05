@@ -1,6 +1,5 @@
 package com.Customer.util;
 
-
 import com.Customer.UserLoginMoudle.PiplineValidate.PipelineExcutor;
 import com.Customer.UserLoginMoudle.PiplineValidate.UserLoginReuestContent;
 import org.junit.jupiter.api.Test;
