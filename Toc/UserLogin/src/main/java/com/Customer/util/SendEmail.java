@@ -1,5 +1,9 @@
 package com.Customer.util;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
+import javax.annotation.PostConstruct;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
@@ -13,8 +17,14 @@ import java.util.Properties;
  *
  * @Author: 东莞呵呵
  */
+@Component
 public class SendEmail {
-    public static void sendEmail(String email, String authCode) throws MessagingException {
+    @Value("${string.mailPost}")
+    private String mailPost;
+    @Value("${string.SMTP}")
+    private String SMTP;
+    public boolean sendEmail(String email, String authCode) throws MessagingException {
+
         // 创建Properties 类用于记录邮箱的一些属性
         Properties props = new Properties();
         // 表示SMTP发送邮件，必须进行身份验证
@@ -24,9 +34,9 @@ public class SendEmail {
         //端口号，QQ邮箱端口587
         props.put("mail.smtp.port", "587");
         // 此处填写，写信人的账号
-        props.put("mail.user", "1940844289@qq.com");
+        props.put("mail.user", mailPost);
         // 此处填写16位STMP口令
-        props.put("mail.password", "rvqwllilrerxcibd");
+        props.put("mail.password", SMTP);
 
         // 构建授权信息，用于进行SMTP进行身份验证
         Authenticator authenticator = new Authenticator() {
@@ -54,5 +64,6 @@ public class SendEmail {
         message.setContent("验证码：" + authCode, "text/html;charset=UTF-8");
         // 最后当然就是发送邮件啦
         Transport.send(message);
+        return true;
     }
 }

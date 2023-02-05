@@ -26,6 +26,8 @@ class SendMessageTest {
     UserService userService;
     @Resource
     pipelineExecutor pipelineExecutor;
+    @Resource
+    SendEmail sendEmail;
 
     @Test
     void userAccount() {
@@ -43,7 +45,7 @@ class SendMessageTest {
             //todo
             String emailCode = String.format("%06d", ThreadLocalRandom.current().nextInt(1000000));
             try {
-                SendEmail.sendEmail(data.getEmail(), emailCode);
+                sendEmail.sendEmail(data.getEmail(), emailCode);
             } catch (MessagingException e) {
                 throw new RuntimeException(e);
             }

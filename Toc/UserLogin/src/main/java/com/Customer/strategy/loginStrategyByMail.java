@@ -22,6 +22,8 @@ public class loginStrategyByMail implements loginStrategy {
     pipelineExecutor pipelineExecutor;
     @Resource
     UserService userService;
+    @Resource
+    SendEmail sendEmail;
 
     @Override
     public boolean loginStrategy(UserLoginReuestContent data) {
@@ -30,7 +32,7 @@ public class loginStrategyByMail implements loginStrategy {
             //todo
             String emailCode = String.format("%06d", ThreadLocalRandom.current().nextInt(1000000));
             try {
-                SendEmail.sendEmail(data.getEmail(), emailCode);
+                boolean flag = sendEmail.sendEmail(data.getEmail(), emailCode);
             } catch (MessagingException e) {
                 throw new RuntimeException(e);
             }
