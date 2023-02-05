@@ -22,6 +22,8 @@ public class UserLoginReuestContent extends PiepleContent implements Serializabl
     private String PhoneNumber;
     private String authCode;
     private String email;
+    private String emailCode;
+
 
     @Override
     public String getName() {
