@@ -23,7 +23,12 @@ public class PiepleContentDataPreChecker implements Contenxthandler<UserLoginReu
             throw new BusinessException(ErrorCode.NULL_ERROR);
         }
         var userPassword = userVo.getUserPassword().trim();
-        if (userPassword.length() >= 2 && userPassword.length() <= 18) {
+        var userAccount = userVo.getUserPassword().trim();
+
+        if (userAccount.length() >= 2 && userAccount.length() <= 16) {
+            return true;
+        }
+        if (userAccount.length() >= 6 && userAccount.length() <= 18) {
             return true;
         } else {
             return false;
