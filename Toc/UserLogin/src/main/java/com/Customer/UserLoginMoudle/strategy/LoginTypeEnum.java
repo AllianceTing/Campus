@@ -10,5 +10,6 @@ public enum LoginTypeEnum {
     //RegistryTypeEnum
     WeChatLogin,
     MailLogin,
-    MessageLogin
+    MessageLogin,
+    AccountLogin
 }

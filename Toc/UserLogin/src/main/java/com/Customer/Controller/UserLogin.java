@@ -1,5 +1,6 @@
 package com.Customer.Controller;
 
+import com.Customer.Aop.PhoneCheck;
 import com.Customer.Config.KaptchaConfig;
 import com.Customer.Exception.BusinessException;
 import com.Customer.Exception.ErrorCode;
@@ -23,7 +24,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Pattern;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -79,8 +79,8 @@ public class UserLogin {
     }
 
     @PostMapping("/loginGetMessageCode")
-    public Object loginGetMessageCode(@Pattern(regexp = "^[1][3,4,5,6,7,8,9][0-9]{9}$"
-            , message = "手机号格式有误") String phoneNumber, HttpServletRequest req) {
+    @PhoneCheck
+    public Object loginGetMessageCode(String phoneNumber, HttpServletRequest req) {
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("phone", phoneNumber);
         User user = userService.getOne(queryWrapper);
