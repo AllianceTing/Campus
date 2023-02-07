@@ -8,10 +8,7 @@ import com.Customer.UserLoginMoudle.PiplineValidate.UserLoginReuestContent;
 import com.Customer.util.SendEmail;
 import com.Customer.util.SendMessage;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.mail.MessagingException;
@@ -30,11 +27,16 @@ import java.util.concurrent.ThreadLocalRandom;
  * @author Alliance github_https://github.com/AllianceTing
  * DATE 2023/1/29~22:28
  */
+@RequestMapping("/user")
 @RestController
 @Valid
 public class UserRegistry {
     @Resource
     private UserService userService;
+    @Resource
+    private SendMessage sendMessage;
+    @Resource
+    private SendEmail sendEmail;
 
     /**
      * 校验手机号格式并且发送信息验证码。
@@ -57,7 +59,7 @@ public class UserRegistry {
             HttpSession session = req.getSession(true);
             session.setAttribute("authCode", authCode);
             session.setMaxInactiveInterval(60 * 5);
-            SendMessage.Send(phoneNumber, authCode);
+            sendMessage.Send(phoneNumber, authCode);
             return ResultUtils.success("OK");
         }
     }
@@ -126,7 +128,7 @@ public class UserRegistry {
         HttpSession session = req.getSession(true);
         session.setAttribute("emailCode", emailCode);
         session.setMaxInactiveInterval(60 * 5);
-        SendEmail.sendEmail(email, emailCode);
+        sendEmail.sendEmail(email, emailCode);
         return ResultUtils.success("OK");
     }
 

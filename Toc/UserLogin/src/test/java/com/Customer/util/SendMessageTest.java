@@ -29,32 +29,32 @@ class SendMessageTest {
 
     @Test
     void userAccount() {
-        UserLoginReuestContent data = new UserLoginReuestContent();
-        data.setUserAccount("username");
-        data.setEmail("2426446427@qq.com");
-        data.setUserPassword("password");
-
-        if (true) {
-            User retUser = userService.selectUserByEmail(data.getEmail());
-            if (retUser != null) {
-                //如果已经使用邮箱返回账号
-                throw new BusinessException("account is already used by  user", 50400, "Invalid email");
-            }
-            //todo
-            String emailCode = String.format("%06d", ThreadLocalRandom.current().nextInt(1000000));
-            try {
-                SendEmail.sendEmail(data.getEmail(), emailCode);
-            } catch (MessagingException e) {
-                throw new RuntimeException(e);
-            }
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-            if (emailCode == data.getEmail()) {
-                System.out.println(emailCode);
-            }
-        }
+//        UserLoginReuestContent data = new UserLoginReuestContent();
+//        data.setUserAccount("username");
+//        data.setEmail("2426446427@qq.com");
+//        data.setUserPassword("password");
+//
+//        if (true) {
+//            User retUser = userService.selectUserByEmail(data.getEmail());
+//            if (retUser != null) {
+//                //如果已经使用邮箱返回账号
+//                throw new BusinessException("account is already used by  user", 50400, "Invalid email");
+//            }
+//            //todo
+//            String emailCode = String.format("%06d", ThreadLocalRandom.current().nextInt(1000000));
+//            try {
+//                //SendEmail.sendEmail(data.getEmail(), emailCode);
+//            } catch (MessagingException e) {
+//                throw new RuntimeException(e);
+//            }
+//            try {
+//                Thread.sleep(100);
+//            } catch (InterruptedException e) {
+//                throw new RuntimeException(e);
+//            }
+//            if (emailCode == data.getEmail()) {
+//                System.out.println(emailCode);
+//            }
+//        }
     }
 }

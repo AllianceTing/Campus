@@ -23,6 +23,8 @@ public class loginStrategyByMessage implements loginStrategy {
 
     @Resource
     PipelineExcutor pipelineExecutor;
+    @Resource
+    SendMessage sendMessage;
 
     @Override
     public boolean loginStrategy(UserLoginReuestContent data) {
@@ -34,7 +36,7 @@ public class loginStrategyByMessage implements loginStrategy {
             HttpSession session = req.getSession(true);
             session.setAttribute("authCode", authCode);
             session.setMaxInactiveInterval(60 * 5);
-            SendMessage.Send(data.getPhoneNumber(), authCode);
+            sendMessage.Send(data.getPhoneNumber(), authCode);
             try {
                 Thread.sleep(100);
             } catch (InterruptedException e) {

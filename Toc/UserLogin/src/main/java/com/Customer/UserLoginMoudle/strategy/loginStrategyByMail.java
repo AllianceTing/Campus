@@ -25,6 +25,8 @@ public class loginStrategyByMail implements loginStrategy {
     PipelineExcutor pipelineExecutor;
     @Resource
     UserService userService;
+    @Resource
+    SendMessage sendMessage;
 
     @Override
     public boolean loginStrategy(UserLoginReuestContent data) {
@@ -35,7 +37,7 @@ public class loginStrategyByMail implements loginStrategy {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        SendMessage.Send(data.getEmail(), TextCode);
+        sendMessage.Send(data.getEmail(), TextCode);
         QueryWrapper<User> query = new QueryWrapper<User>();
         query.eq("email", data.getEmail());
         User userServiceOne = userService.getOne(query);
