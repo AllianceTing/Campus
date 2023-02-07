@@ -1,16 +1,16 @@
 package com.Customer.UserLoginMoudle.strategy;
 
+import com.Customer.PO.User;
+import com.Customer.Service.UserService;
 import com.Customer.UserLoginMoudle.PiplineValidate.PipelineExcutor;
 import com.Customer.UserLoginMoudle.PiplineValidate.UserLoginReuestContent;
-import com.Customer.util.SendMessage;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * PROJECT_NAME RegistryStrategyByWeChat
@@ -23,25 +23,25 @@ public class loginStrategyByMessage implements loginStrategy {
 
     @Resource
     PipelineExcutor pipelineExecutor;
+    @Resource
+    UserService userService;
 
     @Override
     public boolean loginStrategy(UserLoginReuestContent data) {
+        // todo 没有对messageCode 和PhoneCode 做规则性校验
         if (pipelineExecutor.acceptSync(data)) {
-            ServletRequestAttributes ra = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-            assert ra != null;
-            HttpServletRequest req = ra.getRequest();
-            String authCode = String.format("%06d", ThreadLocalRandom.current().nextInt(1000000));
-            HttpSession session = req.getSession(true);
-            session.setAttribute("authCode", authCode);
-            session.setMaxInactiveInterval(60 * 5);
-            SendMessage.Send(data.getPhoneNumber(), authCode);
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            if (session.getAttribute("authCode").equals(data.getAuthCode())) {
-                return true;
+            QueryWrapper<User> query = new QueryWrapper<User>();
+            query.eq("phoneNumber", data.getPhoneNumber());
+            User userServiceOne = userService.getOne(query);
+            if (userServiceOne != null) {
+                ServletRequestAttributes ra = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+                assert ra != null;
+                HttpServletRequest req = (HttpServletRequest) ra.getRequest().getSession();
+                Object messageCode = req.getAttribute("authCode");
+                Object messagePhone = req.getAttribute("messagePhone");
+                if (messageCode != null && messageCode.equals(data.getAuthCode()) && messagePhone.equals(data.getPhoneNumber())) {
+                    return true;
+                }
             }
         }
         return false;

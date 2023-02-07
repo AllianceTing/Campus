@@ -22,9 +22,10 @@ class SendEmailTest {
     @Test
     void test() {
         UserLoginReuestContent user = new UserLoginReuestContent();
-        user.setUserAccount("username");
-        user.setUserPassword("password");
+        user.setUserAccount("u");
+        user.setUserPassword("p");
         user.setEmail("2426446427@qq.com");
-        Pipelin.acceptSync(user);
+        boolean b = Pipelin.acceptSync(user);
+        System.out.println(b);
     }
 }
