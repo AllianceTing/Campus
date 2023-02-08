@@ -1,7 +1,6 @@
 package com.Customer.util;
 
 import org.apache.http.HttpResponse;
-import org.apache.http.util.EntityUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -32,13 +31,14 @@ public class SendMessage {
     private String templateId;
     @Value("${string.time}")
     private String time;
-    public boolean Send(String number,String authCode){
+
+    public static boolean Send(String number, String authCode) {
         Map<String, String> headers = new HashMap<String, String>();
         //最后在header中的格式(中间是英文空格)为Authorization:APPCODE 83359fd73fe94948385f570e3c139105
         headers.put("Authorization", "APPCODE " + appcode);
         Map<String, String> querys = new HashMap<String, String>();
         querys.put("mobile", number);
-        querys.put("param", "**code**:"+authCode+time);
+        querys.put("param", "**code**:" + authCode + time);
         //smsSignId（短信前缀）和templateId（短信模板），可登录国阳云控制台自助申请。参考文档：http://help.guoyangyun.com/Problem/Qm.html
         querys.put("smsSignId", smsSignId);
         querys.put("templateId", templateId);
