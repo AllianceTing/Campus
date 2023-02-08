@@ -1,6 +1,5 @@
 package com.Customer.UserLoginMoudle.strategy;
 
-import com.Customer.Service.UserService;
 import com.Customer.UserLoginMoudle.PiplineValidate.PipelineExcutor;
 import com.Customer.UserLoginMoudle.PiplineValidate.UserLoginReuestContent;
 import org.springframework.stereotype.Service;
@@ -18,8 +17,6 @@ public class loginStrategyByWeChat implements loginStrategy {
 
     @Resource
     PipelineExcutor pipelineExecutor;
-    @Resource
-    UserService userService;
 
     @Override
     public boolean loginStrategy(UserLoginReuestContent data) {

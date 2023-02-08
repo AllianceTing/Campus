@@ -1,7 +1,7 @@
 package com.Customer.UserLoginMoudle.strategy;
 
+import com.Customer.Mapper.UserMapper;
 import com.Customer.PO.User;
-import com.Customer.Service.UserService;
 import com.Customer.UserLoginMoudle.PiplineValidate.PipelineExcutor;
 import com.Customer.UserLoginMoudle.PiplineValidate.UserLoginReuestContent;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -24,15 +24,15 @@ public class loginStrategyByMessage implements loginStrategy {
     @Resource
     PipelineExcutor pipelineExecutor;
     @Resource
-    UserService userService;
+    UserMapper userService;
 
     @Override
     public boolean loginStrategy(UserLoginReuestContent data) {
         // todo 没有对messageCode 和PhoneCode 做规则性校验
         if (pipelineExecutor.acceptSync(data)) {
-            QueryWrapper<User> query = new QueryWrapper<User>();
+            QueryWrapper<User> query = new QueryWrapper<>();
             query.eq("phone", data.getPhoneNumber());
-            User userServiceOne = userService.getOne(query);
+            User userServiceOne = userService.selectOne(query);
             if (userServiceOne != null) {
                 ServletRequestAttributes ra = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
                 assert ra != null;

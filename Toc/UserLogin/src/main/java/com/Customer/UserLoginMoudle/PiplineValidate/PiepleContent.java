@@ -2,6 +2,7 @@ package com.Customer.UserLoginMoudle.PiplineValidate;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -14,6 +15,7 @@ import java.time.LocalDateTime;
  */
 @Getter
 @Setter
+@Component
 public class PiepleContent implements Serializable {
     private LocalDateTime startDateTime; // 管道分支任务开始时间
 

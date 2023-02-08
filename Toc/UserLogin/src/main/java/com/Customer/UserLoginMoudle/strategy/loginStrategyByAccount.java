@@ -1,7 +1,7 @@
 package com.Customer.UserLoginMoudle.strategy;
 
+import com.Customer.Mapper.UserMapper;
 import com.Customer.PO.User;
-import com.Customer.Service.UserService;
 import com.Customer.UserLoginMoudle.PiplineValidate.PipelineExcutor;
 import com.Customer.UserLoginMoudle.PiplineValidate.UserLoginReuestContent;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -21,7 +21,7 @@ public class loginStrategyByAccount implements loginStrategy {
     @Resource
     PipelineExcutor pipelineExecutor;
     @Resource
-    UserService userService;
+    UserMapper userService;
 
     @Override
     public boolean loginStrategy(UserLoginReuestContent data) {
@@ -29,7 +29,7 @@ public class loginStrategyByAccount implements loginStrategy {
             QueryWrapper<User> query = new QueryWrapper<User>();
             query.eq("userAccount", data.getUserAccount());
             query.eq("userPassword", data.getUserPassword());
-            User userServiceOne = userService.getOne(query);
+            User userServiceOne = userService.selectOne(query);
             if (userServiceOne != null) {
                 return true;
             }

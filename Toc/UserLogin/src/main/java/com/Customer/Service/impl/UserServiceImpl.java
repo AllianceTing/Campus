@@ -11,8 +11,10 @@ import com.Customer.UserLoginMoudle.strategy.LoginTypeEnum;
 import com.Customer.UserLoginMoudle.strategy.strategyContent;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
+
 
 /**
  * @author Lenovo
@@ -22,9 +24,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         implements UserService {
-    @Autowired
+    @Resource
     UserMapper userMapper;
-
+    @Resource
+    strategyContent strategyContent;
 
     @Override
     public User selectUserByAccount(String userAccount) {
@@ -40,21 +43,14 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         return userMapper.selectOne(queryWrapper);
     }
 
-
     public Object doUserLogin(UserLoginReuestContent userVo, LoginTypeEnum strategyName) {
-        boolean flag = strategyContent.getLoginStrategy(strategyName).loginStrategy(userVo);
+        boolean flag = strategyContent.doUserLogin(strategyName).loginStrategy(userVo);
+        System.out.println(flag);
         if (flag != true) {
             //todo registry
             return ResultUtils.error(ErrorCode.NULL_ERROR);
         }
         return ResultUtils.success(ErrorCode.SUCCESS);
-    }
-
-    public QueryWrapper<User> getListUserPage(UserLoginReuestContent userVo) {
-        QueryWrapper<User> UserBasequeryWrapper = new QueryWrapper();
-        UserBasequeryWrapper.eq("userAccount", userVo.getUserAccount());
-        UserBasequeryWrapper.eq("userPassword", userVo.getUserPassword());
-        return UserBasequeryWrapper;
     }
 }
 

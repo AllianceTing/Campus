@@ -12,7 +12,6 @@ import com.Customer.UserLoginMoudle.strategy.LoginTypeEnum;
 import com.Customer.VO.UserVo;
 import com.Customer.util.SendMessage;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -38,7 +37,6 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 @RestController
 @RequestMapping(value = "/user")
-@RequiredArgsConstructor
 public class UserLogin {
     @Resource
     UserService userService;

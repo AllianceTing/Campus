@@ -11,5 +11,6 @@ public enum LoginTypeEnum {
     WeChatLogin,
     MailLogin,
     MessageLogin,
-    AccountLogin
+    AccountLogin,
+    test
 }

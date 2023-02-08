@@ -20,11 +20,8 @@ class SendEmailTest {
     @Test
     void test() {
         UserLoginReuestContent user = new UserLoginReuestContent();
-        user.setUserAccount("u");
-        user.setUserPassword("p");
-        user.setAuthCode("222222");
-        user.setPhoneNumber("18080266036");
-        boolean b1 = strategyContent.getLoginStrategy(LoginTypeEnum.MessageLogin).loginStrategy(user);
+        user.setEmail("111");
+        boolean b1 = strategyContent.doUserLogin(LoginTypeEnum.test).loginStrategy(user);
         System.out.println(b1);
     }
 }

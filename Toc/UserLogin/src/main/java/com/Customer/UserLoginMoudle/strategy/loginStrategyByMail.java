@@ -1,7 +1,7 @@
 package com.Customer.UserLoginMoudle.strategy;
 
+import com.Customer.Mapper.UserMapper;
 import com.Customer.PO.User;
-import com.Customer.Service.UserService;
 import com.Customer.UserLoginMoudle.PiplineValidate.PipelineExcutor;
 import com.Customer.UserLoginMoudle.PiplineValidate.UserLoginReuestContent;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -24,7 +24,7 @@ public class loginStrategyByMail implements loginStrategy {
     @Resource
     PipelineExcutor pipelineExecutor;
     @Resource
-    UserService userService;
+    UserMapper userService;
 
 
     @Override
@@ -32,7 +32,7 @@ public class loginStrategyByMail implements loginStrategy {
         if (pipelineExecutor.acceptSync(data)) {
             QueryWrapper<User> query = new QueryWrapper<User>();
             query.eq("email", data.getEmail());
-            User userServiceOne = userService.getOne(query);
+            User userServiceOne = userService.selectOne(query);
             if (userServiceOne != null) {
                 ServletRequestAttributes ra = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
                 assert ra != null;

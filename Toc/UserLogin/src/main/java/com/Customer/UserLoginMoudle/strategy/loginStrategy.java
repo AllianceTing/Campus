@@ -8,8 +8,8 @@ import com.Customer.UserLoginMoudle.PiplineValidate.UserLoginReuestContent;
  * @author Alliance github_https://github.com/AllianceTing
  * DATE 2023/2/2~11:59
  */
-public interface loginStrategy<T extends UserLoginReuestContent> {
-    boolean loginStrategy(T data);
+public interface loginStrategy {
+    boolean loginStrategy(UserLoginReuestContent data);
 
     LoginTypeEnum getloginType();
 }
