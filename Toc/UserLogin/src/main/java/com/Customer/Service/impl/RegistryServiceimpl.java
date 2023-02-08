@@ -4,13 +4,13 @@ import com.Customer.Service.RegistryMailService;
 import org.springframework.stereotype.Service;
 
 /**
- * PROJECT_NAME RegistryMailServiceimpl
+ * PROJECT_NAME RegistryServiceimpl
  *
  * @author Alliance github_https://github.com/AllianceTing
  * DATE 2023/1/29~22:16
  */
 @Service
-public class RegistryMailServiceimpl implements RegistryMailService {
+public class RegistryServiceimpl implements RegistryMailService {
 //    @Resource
 //    JavaMailSender javaMailSender;
 //
