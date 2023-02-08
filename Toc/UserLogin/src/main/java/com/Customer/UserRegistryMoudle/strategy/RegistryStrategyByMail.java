@@ -19,6 +19,8 @@ import java.util.concurrent.ThreadLocalRandom;
 public class RegistryStrategyByMail implements RegistryStrategy {
     @Resource
     RegistryPipelineExcutor pipelineExecutor;
+    @Resource
+    SendEmail sendEmail;
 
     @Override
     public boolean loginStrategy(UserRegistryRequestContent data) {
@@ -27,7 +29,7 @@ public class RegistryStrategyByMail implements RegistryStrategy {
             //todo
             String emailCode = String.format("%06d", ThreadLocalRandom.current().nextInt(1000000));
             try {
-                SendEmail.sendEmail(data.getEmail(), emailCode);
+                sendEmail.sendEmail(data.getEmail(), emailCode);
             } catch (MessagingException e) {
                 throw new RuntimeException(e);
             }
