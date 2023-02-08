@@ -49,6 +49,27 @@ public class UserLogin {
     public Object userLogin(@RequestBody @NotBlank @Validated UserLoginReuestContent userVo, @RequestParam @NotBlank LoginTypeEnum strategyName) {
         return userService.doUserLogin(userVo, strategyName);
     }
+
+    @PostMapping("/loginGetMessageCode")
+    @PhoneCheck
+    public Object loginGetMessageCode(String phoneNumber, HttpServletRequest req) {
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("phone", phoneNumber);
+        User user = userService.getOne(queryWrapper);
+        if (user == null) {
+            return ResultUtils.error(50400, "登录失败，手机号未注册", user.getUserAccount());
+        } else {
+            //todo
+            String authCode = String.format("%06d", ThreadLocalRandom.current().nextInt(1000000));
+            HttpSession session = req.getSession(true);
+            session.setAttribute("authCode", authCode);
+            session.setAttribute("messagePhone", phoneNumber);
+            session.setMaxInactiveInterval(60 * 5);
+            SendMessage.Send(phoneNumber, authCode);
+            return ResultUtils.success("OK");
+        }
+    }
+
     @PostMapping("/loginGetMailCode")
     public void loginGetMailCode(HttpServletResponse httpServletResponse, HttpServletRequest httpServletRequest, UserLoginReuestContent userLoginReuestContent) throws IOException {
 
@@ -74,73 +95,6 @@ public class UserLogin {
             responseOutputStream.write(captchaOutputStream);
             responseOutputStream.flush();
             responseOutputStream.close();
-        }
-    }
-
-    @PostMapping("/loginGetMessageCode")
-    @PhoneCheck
-    public Object loginGetMessageCode(String phoneNumber, HttpServletRequest req) {
-        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("phone", phoneNumber);
-        User user = userService.getOne(queryWrapper);
-        if (user == null) {
-            return ResultUtils.error(50400, "登录失败，手机号未注册", user.getUserAccount());
-        } else {
-            //todo
-            String authCode = String.format("%06d", ThreadLocalRandom.current().nextInt(1000000));
-            HttpSession session = req.getSession(true);
-            session.setAttribute("authCode", authCode);
-            session.setAttribute("messagePhone", phoneNumber);
-            session.setMaxInactiveInterval(60 * 5);
-            SendMessage.Send(phoneNumber, authCode);
-            return ResultUtils.success("OK");
-        }
-    }
-    @PostMapping("/loginGetMailCode")
-    public void loginGetMailCode(HttpServletResponse httpServletResponse, HttpServletRequest httpServletRequest, UserLoginReuestContent userLoginReuestContent) throws IOException {
-
-        if (userLoginReuestContent.getEmail() != null) {
-            byte[] captchaOutputStream = null;
-            ByteArrayOutputStream imgOutputStream = new ByteArrayOutputStream();
-            try {
-                //生产验证码字符串并保存到session中
-                String verifyCode = captchaProducer.producer().createText();
-                httpServletRequest.getSession().setAttribute("verifyCode", verifyCode);
-                httpServletRequest.getSession().setAttribute("verifyEmail", userLoginReuestContent.getEmail());
-                BufferedImage challenge = captchaProducer.producer().createImage(verifyCode);
-                ImageIO.write(challenge, "jpg", imgOutputStream);
-            } catch (IllegalArgumentException e) {
-                httpServletResponse.sendError(HttpServletResponse.SC_NOT_FOUND);
-            }
-            captchaOutputStream = imgOutputStream.toByteArray();
-            httpServletResponse.setHeader("Cache-Control", "no-store");
-            httpServletResponse.setHeader("Pragma", "no-cache");
-            httpServletResponse.setDateHeader("Expires", 0);
-            httpServletResponse.setContentType("image/jpeg");
-            ServletOutputStream responseOutputStream = httpServletResponse.getOutputStream();
-            responseOutputStream.write(captchaOutputStream);
-            responseOutputStream.flush();
-            responseOutputStream.close();
-        }
-    }
-
-    @PostMapping("/loginGetMessageCode")
-    @PhoneCheck
-    public Object loginGetMessageCode(String phoneNumber, HttpServletRequest req) {
-        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("phone", phoneNumber);
-        User user = userService.getOne(queryWrapper);
-        if (user == null) {
-            return ResultUtils.error(50400, "登录失败，手机号未注册", user.getUserAccount());
-        } else {
-            //todo
-            String authCode = String.format("%06d", ThreadLocalRandom.current().nextInt(1000000));
-            HttpSession session = req.getSession(true);
-            session.setAttribute("authCode", authCode);
-            session.setAttribute("messagePhone", phoneNumber);
-            session.setMaxInactiveInterval(60 * 5);
-            SendMessage.Send(phoneNumber, authCode);
-            return ResultUtils.success("OK");
         }
     }
 

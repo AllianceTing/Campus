@@ -1,16 +1,16 @@
 package com.Customer.UserLoginMoudle.strategy;
 
+import com.Customer.PO.User;
+import com.Customer.Service.UserService;
 import com.Customer.UserLoginMoudle.PiplineValidate.PipelineExcutor;
 import com.Customer.UserLoginMoudle.PiplineValidate.UserLoginReuestContent;
-import com.Customer.util.SendMessage;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * PROJECT_NAME RegistryStrategyByWeChat
