@@ -3,7 +3,6 @@ package com.Customer.util;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
@@ -19,10 +18,11 @@ import java.util.Properties;
  */
 @Component
 public class SendEmail {
-    @Value("${string.mailPost}")
+    @Value("${ms.mailPost}")
     private String mailPost;
-    @Value("${string.SMTP}")
+    @Value("${ms.SMTP}")
     private String SMTP;
+
     public boolean sendEmail(String email, String authCode) throws MessagingException {
 
         // 创建Properties 类用于记录邮箱的一些属性

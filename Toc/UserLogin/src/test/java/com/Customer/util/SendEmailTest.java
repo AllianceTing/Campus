@@ -1,9 +1,9 @@
 package com.Customer.util;
 
-import com.Customer.UserLoginMoudle.PiplineValidate.PipelineExcutor;
 import com.Customer.UserLoginMoudle.PiplineValidate.UserLoginReuestContent;
+import com.Customer.UserLoginMoudle.strategy.LoginTypeEnum;
+import com.Customer.UserLoginMoudle.strategy.strategyContent;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 /**
@@ -16,16 +16,15 @@ import org.springframework.boot.test.context.SpringBootTest;
  */
 @SpringBootTest
 class SendEmailTest {
-    @Autowired
-    PipelineExcutor Pipelin;
 
     @Test
     void test() {
         UserLoginReuestContent user = new UserLoginReuestContent();
         user.setUserAccount("u");
         user.setUserPassword("p");
-        user.setEmail("2426446427@qq.com");
-        boolean b = Pipelin.acceptSync(user);
-        System.out.println(b);
+        user.setAuthCode("222222");
+        user.setPhoneNumber("18080266036");
+        boolean b1 = strategyContent.getLoginStrategy(LoginTypeEnum.MessageLogin).loginStrategy(user);
+        System.out.println(b1);
     }
 }

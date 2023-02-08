@@ -44,6 +44,8 @@ public class UserLogin {
     UserService userService;
     @Resource
     KaptchaConfig captchaProducer;
+    @Resource
+    SendMessage sendMessage;
 
     @PostMapping("/login")
     public Object userLogin(@RequestBody @NotBlank @Validated UserLoginReuestContent userVo, @RequestParam @NotBlank LoginTypeEnum strategyName) {
@@ -57,7 +59,7 @@ public class UserLogin {
         queryWrapper.eq("phone", phoneNumber);
         User user = userService.getOne(queryWrapper);
         if (user == null) {
-            return ResultUtils.error(50400, "登录失败，手机号未注册", user.getUserAccount());
+            return ResultUtils.error(ErrorCode.NULL_ERROR);
         } else {
             //todo
             String authCode = String.format("%06d", ThreadLocalRandom.current().nextInt(1000000));
@@ -65,7 +67,7 @@ public class UserLogin {
             session.setAttribute("authCode", authCode);
             session.setAttribute("messagePhone", phoneNumber);
             session.setMaxInactiveInterval(60 * 5);
-            SendMessage.Send(phoneNumber, authCode);
+            sendMessage.Send(phoneNumber, authCode);
             return ResultUtils.success("OK");
         }
     }

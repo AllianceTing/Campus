@@ -19,14 +19,14 @@ import java.util.Objects;
 @Component
 public class PipelineExcutor {
 
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    private final Logger logger = LoggerFactory.getLogger(PipelineExcutor.class);
 
     /**
      * 引用 PipelineRouteConfig 中的 pipelineRouteMap
      */
     @Resource
     private Map<Class<? extends PiepleContent>,
-                List<? extends Contenxthandler<? super PiepleContent>>> pipelineRouteMap;
+            List<? extends Contenxthandler<? super PiepleContent>>> pipelineRouteMap;
 
     /**
      * 同步处理输入的上下文数据<br/>
@@ -60,7 +60,9 @@ public class PipelineExcutor {
             }
 
             // 不再向下处理
-            if (!lastSuccess) { break; }
+            if (!lastSuccess) {
+                break;
+            }
         }
 
         return lastSuccess;

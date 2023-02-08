@@ -1,4 +1,4 @@
-string:
+ms:
   #发送邮箱的地址
   mailPost: "1940844289@qq.com"
   SMTP: "rvqwllilrerxcibd"

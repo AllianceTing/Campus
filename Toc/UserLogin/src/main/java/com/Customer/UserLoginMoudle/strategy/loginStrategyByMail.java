@@ -4,7 +4,6 @@ import com.Customer.PO.User;
 import com.Customer.Service.UserService;
 import com.Customer.UserLoginMoudle.PiplineValidate.PipelineExcutor;
 import com.Customer.UserLoginMoudle.PiplineValidate.UserLoginReuestContent;
-import com.Customer.util.SendMessage;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -26,8 +25,7 @@ public class loginStrategyByMail implements loginStrategy {
     PipelineExcutor pipelineExecutor;
     @Resource
     UserService userService;
-    @Resource
-    SendMessage sendMessage;
+
 
     @Override
     public boolean loginStrategy(UserLoginReuestContent data) {

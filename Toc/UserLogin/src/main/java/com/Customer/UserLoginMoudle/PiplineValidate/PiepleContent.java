@@ -3,6 +3,7 @@ package com.Customer.UserLoginMoudle.PiplineValidate;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
@@ -13,7 +14,7 @@ import java.time.LocalDateTime;
  */
 @Getter
 @Setter
-public class PiepleContent {
+public class PiepleContent implements Serializable {
     private LocalDateTime startDateTime; // 管道分支任务开始时间
 
     private LocalDateTime endDateTime; // 管道分支任务结束时间
@@ -21,4 +22,5 @@ public class PiepleContent {
     public String getName() {
         return this.getClass().getSimpleName();
     }
+
 }

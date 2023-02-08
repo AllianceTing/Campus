@@ -27,8 +27,8 @@ public class loginStrategyByAccount implements loginStrategy {
     public boolean loginStrategy(UserLoginReuestContent data) {
         if (pipelineExecutor.acceptSync(data)) {
             QueryWrapper<User> query = new QueryWrapper<User>();
-            query.eq("Account", data.getUserAccount());
-            query.eq("Password", data.getUserPassword());
+            query.eq("userAccount", data.getUserAccount());
+            query.eq("userPassword", data.getUserPassword());
             User userServiceOne = userService.getOne(query);
             if (userServiceOne != null) {
                 return true;

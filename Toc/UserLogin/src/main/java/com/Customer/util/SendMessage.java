@@ -2,11 +2,13 @@ package com.Customer.util;
 
 import org.apache.http.HttpResponse;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.Map;
 
+@Component
 /**
  * Created with IntelliJ IDEA.
  * Description:
@@ -15,24 +17,25 @@ import java.util.Map;
  *
  * @Author: 东莞呵呵
  */
-@Component
+@ConfigurationProperties(prefix = "ms")
 public class SendMessage {
-    @Value("${string.host}")
+    @Value("${ms.host}")
     private String host;
-    @Value("${string.path}")
+    @Value("${ms.path}")
     private String path;
-    @Value("${string.method}")
+    @Value("${ms.method}")
     private String method;
-    @Value("${string.appcode}")
+    @Value("${ms.appcode}")
     private String appcode;
-    @Value("${string.smsSignId}")
+    @Value("${ms.smsSignId}")
     private String smsSignId;
-    @Value("${string.templateId}")
+    @Value("${ms.templateId}")
     private String templateId;
-    @Value("${string.time}")
+    @Value("${ms.time}")
     private String time;
 
-    public static boolean Send(String number, String authCode) {
+
+    public boolean Send(String number, String authCode) {
         Map<String, String> headers = new HashMap<String, String>();
         //最后在header中的格式(中间是英文空格)为Authorization:APPCODE 83359fd73fe94948385f570e3c139105
         headers.put("Authorization", "APPCODE " + appcode);
