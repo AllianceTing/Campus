@@ -24,26 +24,24 @@ public class loginStrategyByMessage implements loginStrategy {
     @Resource
     PipelineExcutor pipelineExecutor;
     @Resource
-    SendMessage sendMessage;
+    UserService userService;
 
     @Override
     public boolean loginStrategy(UserLoginReuestContent data) {
+        // todo 没有对messageCode 和PhoneCode 做规则性校验
         if (pipelineExecutor.acceptSync(data)) {
-            ServletRequestAttributes ra = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-            assert ra != null;
-            HttpServletRequest req = ra.getRequest();
-            String authCode = String.format("%06d", ThreadLocalRandom.current().nextInt(1000000));
-            HttpSession session = req.getSession(true);
-            session.setAttribute("authCode", authCode);
-            session.setMaxInactiveInterval(60 * 5);
-            sendMessage.Send(data.getPhoneNumber(), authCode);
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            if (session.getAttribute("authCode").equals(data.getAuthCode())) {
-                return true;
+            QueryWrapper<User> query = new QueryWrapper<User>();
+            query.eq("phoneNumber", data.getPhoneNumber());
+            User userServiceOne = userService.getOne(query);
+            if (userServiceOne != null) {
+                ServletRequestAttributes ra = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+                assert ra != null;
+                HttpServletRequest req = (HttpServletRequest) ra.getRequest().getSession();
+                Object messageCode = req.getAttribute("authCode");
+                Object messagePhone = req.getAttribute("messagePhone");
+                if (messageCode != null && messageCode.equals(data.getAuthCode()) && messagePhone.equals(data.getPhoneNumber())) {
+                    return true;
+                }
             }
         }
         return false;
