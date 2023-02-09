@@ -19,4 +19,6 @@ public interface UserService extends IService<User> {
 
     Object doUserLogin(UserLoginReuestContent userVo, LoginTypeEnum strategyName);
 
+    Object doUserLogOut(UserLoginReuestContent userVo);
+
 }

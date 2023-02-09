@@ -1,4 +1,4 @@
-package com.Customer.Aop;
+package com.compus.ASPECT;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;

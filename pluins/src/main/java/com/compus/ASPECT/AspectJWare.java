@@ -1,4 +1,4 @@
-package com.Customer.Aop;
+package com.compus.ASPECT;
 
 
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -26,7 +26,7 @@ import java.util.Stack;
 @Component
 @Aspect
 public class AspectJWare {
-    @Pointcut("@annotation(com.Customer.Aop.AuthCheck)")
+    @Pointcut("@annotation(com.compus.ASPECT.AuthCheck)")
     public void pointcut() {
     }
 

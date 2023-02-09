@@ -25,7 +25,33 @@
             <artifactId>spring-boot-starter-web</artifactId>
             <version>3.0.2</version>
         </dependency>
+        <dependency>
+            <groupId>com.compus</groupId>
+            <artifactId>pluins</artifactId>
+            <version>V1.0.0-RC</version>
+        </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <!--            <plugin>-->
+            <!--                <groupId>org.graalvm.buildtools</groupId>-->
+            <!--                <artifactId>native-maven-plugin</artifactId>-->
+            <!--            </plugin>-->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <excludes>
+                        <exclude>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                        </exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
 
 

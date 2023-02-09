@@ -1,6 +1,5 @@
 package com.Customer.Controller;
 
-import com.Customer.Aop.PhoneCheck;
 import com.Customer.Config.KaptchaConfig;
 import com.Customer.Exception.BusinessException;
 import com.Customer.Exception.ErrorCode;
@@ -10,14 +9,17 @@ import com.Customer.Service.UserService;
 import com.Customer.UserLoginMoudle.PiplineValidate.UserLoginReuestContent;
 import com.Customer.UserLoginMoudle.strategy.LoginTypeEnum;
 import com.Customer.VO.UserVo;
+import com.Customer.util.JWTUtils;
 import com.Customer.util.SendMessage;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.compus.ASPECT.PhoneCheck;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -46,8 +48,17 @@ public class UserLogin {
     SendMessage sendMessage;
 
     @PostMapping("/login")
-    public Object userLogin(@RequestBody @NotBlank @Validated UserLoginReuestContent userVo, @RequestParam @NotBlank LoginTypeEnum strategyName) {
-        return userService.doUserLogin(userVo, strategyName);
+    public Object userLogin(@RequestBody @NotBlank @Validated UserLoginReuestContent userVo, @RequestParam @NotBlank LoginTypeEnum strategyName, HttpServletResponse response) {
+        Object doUserLogin = userService.doUserLogin(userVo, strategyName);
+        String token = JWTUtils.CreateJWT(userVo.getUserAccount(), userVo.getUserPassword());
+        Cookie cookie = new Cookie("AUTH", token);
+        response.addCookie(cookie);
+        return ResultUtils.success(doUserLogin);
+    }
+
+    @PostMapping("/logout")
+    public Object userLogOut(@RequestBody @NotBlank @Validated UserLoginReuestContent userVo, HttpServletResponse response) {
+        return userService.doUserLogOut(userVo);
     }
 
     @PostMapping("/loginGetMessageCode")
@@ -104,7 +115,7 @@ public class UserLogin {
         if (userVo == null) {
             throw new BusinessException(ErrorCode.NULL_ERROR);
         }
-        QueryWrapper<User> UserBasequeryWrapper = new QueryWrapper();
+        QueryWrapper<User> UserBasequeryWrapper = new QueryWrapper<User>();
         UserBasequeryWrapper.eq("userAccount", userVo.getUserAccount());
         UserBasequeryWrapper.eq("userPassword", userVo.getUserPassword());
         User userServiceOne = userService.getOne(UserBasequeryWrapper);

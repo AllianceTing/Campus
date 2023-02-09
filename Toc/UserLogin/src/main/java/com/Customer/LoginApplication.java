@@ -4,7 +4,6 @@ import com.Customer.util.SendMessage;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.context.annotation.ComponentScan;
 
 /**
  * PROJECT_NAME LoginApplication
@@ -14,7 +13,6 @@ import org.springframework.context.annotation.ComponentScan;
  */
 @SpringBootApplication
 @EnableConfigurationProperties(SendMessage.class)
-@ComponentScan(basePackages = "com.Customer.**")
 public class LoginApplication {
     public static void main(String[] args) {
         SpringApplication.run(LoginApplication.class, args);

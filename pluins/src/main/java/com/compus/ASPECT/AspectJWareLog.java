@@ -1,4 +1,4 @@
-package com.Customer.Aop;
+package com.compus.ASPECT;
 
 
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -29,7 +29,7 @@ import java.util.Map;
 public class AspectJWareLog {
     Logger log = LoggerFactory.getLogger("Log");
 
-    @Pointcut("@annotation(com.Customer.Aop.Log)")
+    @Pointcut("@annotation(com.compus.ASPECT.Log)")
     public void pointcut() {
     }
 
