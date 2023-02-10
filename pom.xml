@@ -28,7 +28,7 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-dependencies</artifactId>
             <version>2021.0.3</version>
-            <scope>import</scope>
+            <scope>runtime</scope>
             <type>pom</type>
         </dependency>
         <!--    alibaba cloud    -->
@@ -37,7 +37,7 @@
             <artifactId>spring-cloud-alibaba-dependencies</artifactId>
             <version>2021.1</version>
             <type>pom</type>
-            <scope>import</scope>
+            <scope>runtime</scope>
         </dependency>
         <!-- springboot configration processor-->
         <dependency>

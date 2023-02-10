@@ -20,3 +20,23 @@ spring:
     add-properties: false
 
 
+ms:
+  #发送邮箱的地址
+  mailPost: "1940844289@qq.com"
+  SMTP: "rvqwllilrerxcibd"
+  #短信发送配置
+  host: https://gyytz.market.alicloudapi.com
+  path: /sms/smsSend
+  method: POST
+  appcode: 27a690dc526c45a4bae3b13b459322a4
+  #短信前缀
+  smsSignId: 2e65b1bb3d054466b82f0c9d125465e2
+  #短信模板
+  templateId: 908e94ccf08b4476ba6c876d13f084ad
+  #验证码时长（短信内容）
+  time: ',**minute**:5'
+
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

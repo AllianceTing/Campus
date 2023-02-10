@@ -1,6 +1,7 @@
 package com.Customer.VO;
 
 import com.Customer.UserLoginMoudle.PiplineValidate.PiepleContent;
+import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.Getter;
 import lombok.Setter;
 import org.checkerframework.common.value.qual.MinLen;
@@ -23,9 +24,11 @@ public class UserVo extends PiepleContent implements Serializable {
      */
     @MinLen(2)
     @Max(18)
+    @TableField("user_account")
     private String userAccount;
     @MinLen(2)
     @Max(18)
+    @TableField("user_password")
     private String userPassword;
 
 

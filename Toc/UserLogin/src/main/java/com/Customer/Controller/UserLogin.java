@@ -12,7 +12,6 @@ import com.Customer.VO.UserVo;
 import com.Customer.util.JWTUtils;
 import com.Customer.util.SendMessage;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.compus.ASPECT.PhoneCheck;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -62,7 +61,6 @@ public class UserLogin {
     }
 
     @PostMapping("/loginGetMessageCode")
-    @PhoneCheck
     public Object loginGetMessageCode(String phoneNumber, HttpServletRequest req) {
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("phone", phoneNumber);

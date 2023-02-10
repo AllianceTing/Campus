@@ -2,6 +2,7 @@ package com.Customer.PO;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,7 +24,7 @@ import java.util.Date;
 @EqualsAndHashCode
 @TableName(value = "user")
 public class User implements Serializable {
-    @TableField(value = "username")
+    @TableField(value = "user_name")
     private String username;
 
     /**
@@ -36,13 +37,13 @@ public class User implements Serializable {
     /**
      *
      */
-    @TableField(value = "userAccount")
+    @TableField(value = "user_account")
     private String userAccount;
 
     /**
      *
      */
-    @TableField(value = "avatarUrl")
+    @TableField(value = "avatar_url")
     private String avatarUrl;
 
     /**
@@ -54,7 +55,7 @@ public class User implements Serializable {
     /**
      *
      */
-    @TableField(value = "userPassword")
+    @TableField(value = "user_password")
     private String userPassword;
 
     /**
@@ -72,31 +73,32 @@ public class User implements Serializable {
     /**
      *
      */
-    @TableField(value = "userStatus")
+    @TableField(value = "user_status")
     private Integer userStatus;
 
     /**
      *
      */
-    @TableField(value = "createTime")
+    @TableField(value = "create_time")
     private Date createTime;
 
     /**
      *
      */
-    @TableField(value = "updateTime")
+    @TableField(value = "update_time")
     private Date updateTime;
 
     /**
      *
      */
-    @TableField(value = "isDelete")
+    @TableField(value = "is_delete")
+    @TableLogic
     private Integer isDelete;
 
     /**
      *
      */
-    @TableField(value = "userRole")
+    @TableField(value = "user_role")
     private Integer userRole;
 
     @TableField(exist = false)
