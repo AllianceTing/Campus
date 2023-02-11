@@ -12,6 +12,7 @@
     <modules>
         <module>Toc</module>
         <module>pluins</module>
+        <module>ToBService</module>
     </modules>
     <groupId>com.compus</groupId>
     <artifactId>Campus</artifactId>

@@ -1,0 +1,17 @@
+spring:
+  cloud:
+    nacos:
+      config:
+        server-addr: 39.106.54.125:8848
+        file-extension: yaml
+        refresh-enabled: true
+        group: TobService
+        namespace: 2baa1cf1-5510-45d5-9cb2-386305be0509
+        prefix: tob-producer
+      discovery:
+        server-addr: 39.106.54.125:8848
+  profiles:
+    active: dev
+  application:
+    name: tob-producer
+
