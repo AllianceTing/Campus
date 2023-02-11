@@ -1,10 +1,9 @@
 package com.Customer.UserLoginMoudle.PiplineValidate;
 
-import com.Customer.Exception.BusinessException;
-import com.Customer.Exception.ErrorCode;
 import org.springframework.stereotype.Component;
 
 import java.util.regex.Pattern;
+
 
 /**
  * PROJECT_NAME RegistryPipileContentDataPreChecker
@@ -22,14 +21,9 @@ public class PiepleContentMailDataPreChecker implements Contenxthandler<UserLogi
      */
     @Override
     public boolean handle(UserLoginReuestContent userVo) {
-        if (userVo == null) {
-            throw new BusinessException(ErrorCode.NULL_ERROR);
-        }
         var Email = userVo.getEmail().trim();
         var EmailCode = userVo.getEmailCode().trim();
-        if (userVo.getUserAccount() == null && userVo.getUserPassword() == null) {
-            return true;
-        }
+        if (Email.isEmpty() && EmailCode.isEmpty()) return true;
         if (Email.length() == 15) {
             if (!pattern.matcher(EmailCode).matches()) return false;
             return true;

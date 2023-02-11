@@ -13,7 +13,6 @@ import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Arrays;
 
 /**
  * PROJECT_NAME JWT
@@ -26,7 +25,10 @@ public class JWT implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
-        String token = Arrays.toString(request.getCookies());
+        String token = request.getCookies()[0].toString();
+        if (token == null && token.length() < 0) {
+            throw new IllegalArgumentException("Cookies cannot be empty");
+        }
         if (!(handler instanceof HandlerMethod)) {
             return true;
         }

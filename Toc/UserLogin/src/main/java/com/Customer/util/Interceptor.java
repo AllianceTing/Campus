@@ -24,8 +24,8 @@ public class Interceptor implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         // 把 拦截器 注册到 Mvc, 同时 设置 拦截 和 放过的 信息
-        registry.addInterceptor(jwtInterceptor).addPathPatterns("/**").excludePathPatterns("/user/login").excludePathPatterns("/user/loginGetMailCode")
-                .excludePathPatterns("/user/loginGetMessageCode").excludePathPatterns("/user/register/**");
+//        registry.addInterceptor(jwtInterceptor).addPathPatterns("/**").excludePathPatterns("/user/login").excludePathPatterns("/user/loginGetMailCode")
+//                .excludePathPatterns("/user/loginGetMessageCode");
 
     }
 

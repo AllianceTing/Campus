@@ -1,0 +1,13 @@
+{
+   "outPath": "src/main/resources/doc",
+   "serverUrl": "http://39.106.54.125", //服务器地址,非必须。导出postman建议设置成http://{{server}}方便直接在postman直接设置环境变量
+   "serverEnv": "dev",
+   "isStrict": false, //是否开启严格模式,严格模式会检查代码注释，在2.6.3即以后的插件版本设置此项时检查到注释错误也会直接中断插件白嵌套的构建周期
+   "allInOne": true,
+   "coverOld": true,
+   "sortByTitle":true,//接口标题顺序
+   "inlineEnum":true,//枚举值默认显示
+   "responseExample":"true",//响应实列输出
+   "pathPrefix": "tcu"
+
+}

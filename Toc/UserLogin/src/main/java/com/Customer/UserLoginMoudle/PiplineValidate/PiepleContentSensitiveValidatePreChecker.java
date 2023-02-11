@@ -13,7 +13,7 @@ import java.util.List;
  */
 
 @Component
-public class PiepleContentValidatePreChecker implements Contenxthandler<UserLoginReuestContent> {
+public class PiepleContentSensitiveValidatePreChecker implements Contenxthandler<UserLoginReuestContent> {
     // todo: implements huge number of sensitive word checking
 
     /**

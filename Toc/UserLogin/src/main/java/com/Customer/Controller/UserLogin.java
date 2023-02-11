@@ -61,27 +61,28 @@ public class UserLogin {
     }
 
     @PostMapping("/loginGetMessageCode")
-    public Object loginGetMessageCode(String phoneNumber, HttpServletRequest req) {
-        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("phone", phoneNumber);
-        User user = userService.getOne(queryWrapper);
-        if (user == null) {
+    public Object loginGetMessageCode(@RequestParam("phone") String phone, HttpServletRequest req) {
+        QueryWrapper wrapper = new QueryWrapper();
+        wrapper.eq("phone", phone);
+        User one = userService.getOne(wrapper);
+        System.out.println(one);
+        if (one == null) {
             return ResultUtils.error(ErrorCode.NULL_ERROR);
+            //todo 请注册
         } else {
             //todo
             String authCode = String.format("%06d", ThreadLocalRandom.current().nextInt(1000000));
             HttpSession session = req.getSession(true);
             session.setAttribute("authCode", authCode);
-            session.setAttribute("messagePhone", phoneNumber);
+            session.setAttribute("messagePhone", phone);
             session.setMaxInactiveInterval(60 * 5);
-            sendMessage.Send(phoneNumber, authCode);
+            sendMessage.Send(phone, authCode);
             return ResultUtils.success("OK");
         }
     }
 
     @PostMapping("/loginGetMailCode")
     public void loginGetMailCode(HttpServletResponse httpServletResponse, HttpServletRequest httpServletRequest, UserLoginReuestContent userLoginReuestContent) throws IOException {
-
         if (userLoginReuestContent.getEmail() != null) {
             byte[] captchaOutputStream = null;
             ByteArrayOutputStream imgOutputStream = new ByteArrayOutputStream();

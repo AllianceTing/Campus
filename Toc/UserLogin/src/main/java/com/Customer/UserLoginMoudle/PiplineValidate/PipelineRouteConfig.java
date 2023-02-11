@@ -33,8 +33,10 @@ public class PipelineRouteConfig implements ApplicationContextAware {
     static {
         PIPELINE_ROUTE_MAP.put(UserLoginReuestContent.class,
                 Arrays.asList(
-                        PiepleContentDataPreChecker.class,
-                        PiepleContentValidatePreChecker.class
+                        PiepleContentUserAPDataPreChecker.class,
+                        PiepleContentSensitiveValidatePreChecker.class,
+                        PiepleContentPhoneDataPreChecker.class,
+                        PiepleContentMailDataPreChecker.class
                 ));
 
     }
