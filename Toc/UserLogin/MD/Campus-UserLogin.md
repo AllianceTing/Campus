@@ -2,7 +2,7 @@
 
 | Version | Update Time | Status | Author | Description |
 |---------|-------------|--------|--------|-------------|
-|v2023-02-11 12:31:47|2023-02-11 12:31:47|auto|@Lenovo|Created by smart-doc|
+|v2023-02-11 22:27:22|2023-02-11 22:27:22|auto|@Lenovo|Created by smart-doc|
 
 
 
@@ -44,17 +44,17 @@ DATE 2023/1/29~16:26
 **Request-example:**
 ```
 curl -X POST -H 'Content-Type: application/json' -i http://39.106.54.125/tcu/user/login?strategyName=WeChatLogin --data '{
-  "startDateTime": "2023-02-11 12:31:48",
-  "endDateTime": "2023-02-11 12:31:48",
-  "userPassword": "ebhqhl",
-  "phoneNumber": "kxj9yw",
-  "authCode": "17082",
-  "emailCode": "17082",
-  "userAccount": "5pnajk",
-  "avatarUrl": "www.stacy-wehner.org",
+  "startDateTime": "2023-02-11 22:27:23",
+  "endDateTime": "2023-02-11 22:27:23",
+  "userPassword": "g4x7d9",
+  "phoneNumber": "k03oh4",
+  "authCode": "3757",
+  "emailCode": "3757",
+  "userAccount": "b6f6mu",
+  "avatarUrl": "www.tyesha-parker.io",
   "gender": 0,
-  "phone": "(925) 212-9888",
-  "email": "rickie.hoeger@gmail.com"
+  "phone": "1-540-910-9141",
+  "email": "gricelda.pacocha@yahoo.com"
 }'
 ```
 **Response-fields:**
@@ -99,17 +99,17 @@ DATE 2023/1/29~16:26
 **Request-example:**
 ```
 curl -X POST -H 'Content-Type: application/json' -i http://39.106.54.125/tcu/user/logout --data '{
-  "startDateTime": "2023-02-11 12:31:48",
-  "endDateTime": "2023-02-11 12:31:48",
-  "userPassword": "otwha3",
-  "phoneNumber": "vlgtwb",
-  "authCode": "17082",
-  "emailCode": "17082",
-  "userAccount": "qd6jbe",
-  "avatarUrl": "www.stacy-wehner.org",
+  "startDateTime": "2023-02-11 22:27:23",
+  "endDateTime": "2023-02-11 22:27:23",
+  "userPassword": "kt427h",
+  "phoneNumber": "8nm859",
+  "authCode": "3757",
+  "emailCode": "3757",
+  "userAccount": "utoh0c",
+  "avatarUrl": "www.tyesha-parker.io",
   "gender": 0,
-  "phone": "(925) 212-9888",
-  "email": "rickie.hoeger@gmail.com"
+  "phone": "1-540-910-9141",
+  "email": "gricelda.pacocha@yahoo.com"
 }'
 ```
 **Response-fields:**
@@ -143,7 +143,7 @@ DATE 2023/1/29~16:26
 
 **Request-example:**
 ```
-curl -X POST -i http://39.106.54.125/tcu/user/loginGetMessageCode --data 'phone=(925) 212-9888'
+curl -X POST -i http://39.106.54.125/tcu/user/loginGetMessageCode --data 'phone=1-540-910-9141'
 ```
 **Response-fields:**
 
@@ -186,7 +186,7 @@ DATE 2023/1/29~16:26
 
 **Request-example:**
 ```
-curl -X POST -i http://39.106.54.125/tcu/user/loginGetMailCode --data 'startDateTime=2023-02-11 12:31:48&endDateTime=2023-02-11 12:31:48&userPassword=gukljn&phoneNumber=4hzy6w&authCode=17082&emailCode=17082&userAccount=7d1kz9&avatarUrl=www.stacy-wehner.org&gender=0&phone=(925) 212-9888&email=rickie.hoeger@gmail.com'
+curl -X POST -i http://39.106.54.125/tcu/user/loginGetMailCode --data 'startDateTime=2023-02-11 22:27:23&endDateTime=2023-02-11 22:27:23&userPassword=0oznd7&phoneNumber=malhbn&authCode=3757&emailCode=3757&userAccount=7twn87&avatarUrl=www.tyesha-parker.io&gender=0&phone=1-540-910-9141&email=gricelda.pacocha@yahoo.com'
 ```
 
 **Response-example:**
@@ -218,10 +218,10 @@ DATE 2023/1/29~16:26
 **Request-example:**
 ```
 curl -X POST -H 'Content-Type: application/json' -i http://39.106.54.125/tcu/user/registry --data '{
-  "startDateTime": "2023-02-11 12:31:48",
-  "endDateTime": "2023-02-11 12:31:48",
-  "userAccount": "uyfo70",
-  "userPassword": "vbehsd"
+  "startDateTime": "2023-02-11 22:27:23",
+  "endDateTime": "2023-02-11 22:27:23",
+  "userAccount": "edkush",
+  "userPassword": "2t484c"
 }'
 ```
 **Response-fields:**
@@ -256,7 +256,7 @@ DATE 2023/1/29~22:28
 
 **Request-example:**
 ```
-curl -X POST -i http://39.106.54.125/tcu/user/register --data 'phoneNumber=h8ggf6'
+curl -X POST -i http://39.106.54.125/tcu/user/register --data 'phoneNumber=d5ftsj'
 ```
 **Response-fields:**
 
@@ -299,18 +299,18 @@ DATE 2023/1/29~22:28
 
 **Request-example:**
 ```
-curl -X POST -H 'Content-Type: application/json' -i http://39.106.54.125/tcu/user/register/authCode?authCode=17082 --data '{
-  "startDateTime": "2023-02-11 12:31:48",
-  "endDateTime": "2023-02-11 12:31:48",
-  "userPassword": "bny299",
-  "phoneNumber": "rdhrmg",
-  "authCode": "17082",
-  "emailCode": "17082",
-  "userAccount": "xomedo",
-  "avatarUrl": "www.stacy-wehner.org",
+curl -X POST -H 'Content-Type: application/json' -i http://39.106.54.125/tcu/user/register/authCode?authCode=3757 --data '{
+  "startDateTime": "2023-02-11 22:27:23",
+  "endDateTime": "2023-02-11 22:27:23",
+  "userPassword": "4bmhzd",
+  "phoneNumber": "ked6lp",
+  "authCode": "3757",
+  "emailCode": "3757",
+  "userAccount": "ycvpfe",
+  "avatarUrl": "www.tyesha-parker.io",
   "gender": 0,
-  "phone": "(925) 212-9888",
-  "email": "rickie.hoeger@gmail.com"
+  "phone": "1-540-910-9141",
+  "email": "gricelda.pacocha@yahoo.com"
 }'
 ```
 **Response-fields:**
@@ -345,7 +345,7 @@ DATE 2023/1/29~22:28
 
 **Request-example:**
 ```
-curl -X POST -i http://39.106.54.125/tcu/user/register/username --data 'userAccount=rejrwl'
+curl -X POST -i http://39.106.54.125/tcu/user/register/username --data 'userAccount=u2v10p'
 ```
 **Response-fields:**
 
@@ -378,7 +378,7 @@ DATE 2023/1/29~22:28
 
 **Request-example:**
 ```
-curl -X POST -i http://39.106.54.125/tcu/user/register/sendUserCode --data 'email=rickie.hoeger@gmail.com'
+curl -X POST -i http://39.106.54.125/tcu/user/register/sendUserCode --data 'email=gricelda.pacocha@yahoo.com'
 ```
 **Response-fields:**
 

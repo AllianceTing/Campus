@@ -1,0 +1,15 @@
+message:
+  message-appcode: 27a690dc526c45a4bae3b13b459322a4
+  message-host-ip: https://gyytz.market.alicloudapi.com
+  message-auth-code-time: ',**minute**:5'
+  message-send-method: POST
+  message-sms-sign-id: 2e65b1bb3d054466b82f0c9d125465e2
+  message-template-id: 908e94ccf08b4476ba6c876d13f084ad
+  message-path: /sms/smsSend
+mail:
+  mail-auth: true
+  mail-port: 587
+  mail-send-host: "1940844289@qq.com"
+  mail-send-smtp-server: "smtp.qq.com"
+  mail-s-m-t-p: "rvqwllilrerxcibd"
+

@@ -13,6 +13,8 @@
         <module>Toc</module>
         <module>pluins</module>
         <module>ToBService</module>
+        <module>TobTocSupport</module>
+        <module>support</module>
     </modules>
     <groupId>com.compus</groupId>
     <artifactId>Campus</artifactId>

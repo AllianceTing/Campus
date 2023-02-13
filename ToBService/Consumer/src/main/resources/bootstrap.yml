@@ -15,3 +15,14 @@ spring:
   application:
     name: tob-consumer
 
+message:
+  AccessKeyId: "LTAI5tPbX6hjj86WttE98i1v"
+  AccessSecret: "mnkGXJ6lqTcQrLQEpngEfYPTjzTBGZ"
+  SmsMessageTempId: "Campuskafka"
+  SmsMessageTempCode: "BMW_CAMPUS"
+mail:
+  mail-auth: true
+  mail-port: 587
+  mail-send-host: "1940844289@qq.com"
+  mail-send-smtp-server: "smtp.qq.com"
+  mail-s-m-t-p: "rvqwllilrerxcibd"
