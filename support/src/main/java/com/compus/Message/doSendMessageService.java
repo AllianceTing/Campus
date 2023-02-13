@@ -9,13 +9,13 @@ import org.springframework.stereotype.Component;
 
 
 /**
- * PROJECT_NAME doSendMessage
+ * PROJECT_NAME doSendMessageService
  *
  * @author Alliance github_https://github.com/AllianceTing
  * DATE 2023/2/12~11:52
  */
 @Component
-public class doSendMessage {
+public class doSendMessageService {
     @Value("${message.AccessKeyId}")
     String AccessKeyId;
     @Value("${message.AccessSecret}")

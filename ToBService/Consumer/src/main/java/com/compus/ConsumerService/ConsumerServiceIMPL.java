@@ -1,7 +1,7 @@
 package com.compus.ConsumerService;
 
-import com.compus.Mail.mailHeadTemp;
-import com.compus.Message.doSendMessage;
+import com.compus.Mail.doSendMailService;
+import com.compus.Message.doSendMessageService;
 import com.compus.TopicKEYS;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -18,9 +18,9 @@ import javax.annotation.Resource;
 @Service
 public class ConsumerServiceIMPL {
     @Resource
-    doSendMessage doSendMessage;
+    doSendMessageService doSendMessageService;
     @Resource
-    mailHeadTemp mailHeadTemp;
+    doSendMailService doSendMailService;
 
     //todo 公共抽取topics -- > meta-inf spring factory
     @KafkaListener(topics = {TopicKEYS.MAIL_TOPIC})
@@ -28,11 +28,13 @@ public class ConsumerServiceIMPL {
         String value = record.value();
         System.out.println(value);
         // 比对下这个类型的bean
-        mailHeadTemp.doProducerSendMail();
+        doSendMailService.doProducerSendMail();
     }
 
     @KafkaListener(topics = {TopicKEYS.MESSAGE_TOPIC})
-    public void doConsumeKafkaMessage(ConsumerRecord<String, String> record) {
+    public void doConsumeKafkaMessage(ConsumerRecord<String, String> record) throws Exception {
         String value = record.value();
+        //todo 此处的phone 是record里取出来的
+        doSendMessageService.smsSendMessage("18080266036");
     }
 }

@@ -6,13 +6,13 @@ import org.springframework.stereotype.Service;
 import java.util.Properties;
 
 /**
- * PROJECT_NAME mailHeadTemp
+ * PROJECT_NAME doSendMailService
  *
  * @author Alliance github_https://github.com/AllianceTing
  * DATE 2023/2/12~11:53
  */
 @Service
-public class mailHeadTemp {
+public class doSendMailService {
     @Value("${mail.mail-send-host}")
     String mailSendUser;
     @Value("${mail.mail-s-m-t-p}")
