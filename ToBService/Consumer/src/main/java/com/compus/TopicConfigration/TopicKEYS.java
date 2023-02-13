@@ -1,4 +1,4 @@
-package com.compus;
+package com.compus.TopicConfigration;
 
 /**
  * PROJECT_NAME TopicKEYS

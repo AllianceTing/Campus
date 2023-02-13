@@ -2,7 +2,7 @@ package com.compus.ConsumerService;
 
 import com.compus.Mail.doSendMailService;
 import com.compus.Message.doSendMessageService;
-import com.compus.TopicKEYS;
+import com.compus.TopicConfigration.TopicKEYS;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
