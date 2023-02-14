@@ -1,4 +1,4 @@
-package com.Customer.Exception;
+package com.compus.Exception;
 
 /**
  * 错误码

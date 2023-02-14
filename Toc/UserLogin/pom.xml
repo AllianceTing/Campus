@@ -118,6 +118,11 @@
             <artifactId>Producer</artifactId>
             <version>V1.0.0-RC</version>
         </dependency>
+        <dependency>
+            <groupId>com.compus</groupId>
+            <artifactId>pluins</artifactId>
+            <version>V1.0.0-RC</version>
+        </dependency>
     </dependencies>
 
     <build>

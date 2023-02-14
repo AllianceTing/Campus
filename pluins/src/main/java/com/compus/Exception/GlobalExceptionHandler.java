@@ -1,4 +1,4 @@
-package com.Customer.Exception;
+package com.compus.Exception;
 
 
 import lombok.extern.slf4j.Slf4j;

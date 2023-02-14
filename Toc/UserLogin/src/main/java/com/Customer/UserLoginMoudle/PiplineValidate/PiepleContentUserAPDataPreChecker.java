@@ -1,6 +1,7 @@
 package com.Customer.UserLoginMoudle.PiplineValidate;
 
-import com.Customer.Exception.ErrorCode;
+
+import com.compus.Exception.ErrorCode;
 import org.springframework.stereotype.Component;
 
 import java.util.regex.Pattern;

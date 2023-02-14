@@ -1,9 +1,6 @@
 package com.Customer.Controller;
 
 import com.Customer.Config.KaptchaConfig;
-import com.Customer.Exception.BusinessException;
-import com.Customer.Exception.ErrorCode;
-import com.Customer.Exception.ResultUtils;
 import com.Customer.PO.User;
 import com.Customer.Service.UserService;
 import com.Customer.UserLoginMoudle.PiplineValidate.UserLoginReuestContent;
@@ -12,6 +9,9 @@ import com.Customer.VO.UserVo;
 import com.Customer.util.JWTUtils;
 import com.Customer.util.SendMessage;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.compus.Exception.BusinessException;
+import com.compus.Exception.ErrorCode;
+import com.compus.Exception.ResultUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 

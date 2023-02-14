@@ -1,7 +1,5 @@
 package com.Customer.Service.impl;
 
-import com.Customer.Exception.ErrorCode;
-import com.Customer.Exception.ResultUtils;
 import com.Customer.Mapper.UserMapper;
 import com.Customer.PO.User;
 import com.Customer.Service.UserService;
@@ -10,6 +8,8 @@ import com.Customer.UserLoginMoudle.strategy.LoginTypeEnum;
 import com.Customer.UserLoginMoudle.strategy.strategyContent;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.compus.Exception.ErrorCode;
+import com.compus.Exception.ResultUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
 

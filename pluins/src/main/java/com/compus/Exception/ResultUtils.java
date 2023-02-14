@@ -1,4 +1,4 @@
-package com.Customer.Exception;
+package com.compus.Exception;
 
 /**
  * 返回工具类
@@ -48,7 +48,7 @@ public class ResultUtils {
      * @return
      */
     public static BaseResponse error(int code, String message, Object data) {
-        return new BaseResponse(code, data, message,"");
+        return new BaseResponse(code, data, message, "");
     }
 
     /**

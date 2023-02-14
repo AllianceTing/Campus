@@ -1,12 +1,12 @@
 package com.Customer.util;
 
 import cn.hutool.core.util.StrUtil;
-import com.Customer.Exception.BusinessException;
-import com.Customer.Exception.ErrorCode;
 import com.Customer.PO.User;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTVerificationException;
+import com.compus.Exception.BusinessException;
+import com.compus.Exception.ErrorCode;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
