@@ -16,6 +16,7 @@
         <module>support</module>
         <module>cronTab</module>
         <module>Task</module>
+        <module>gateway</module>
     </modules>
     <groupId>com.compus</groupId>
     <artifactId>Campus</artifactId>
