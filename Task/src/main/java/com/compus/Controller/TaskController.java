@@ -4,11 +4,14 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.compus.Exception.BaseResponse;
+import com.compus.Exception.BusinessException;
 import com.compus.Exception.ErrorCode;
 import com.compus.Exception.ResultUtils;
+import com.compus.Request.TaskRequestVo;
 import com.compus.domain.TaskInfo;
 import com.compus.service.TaskService;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,8 +33,8 @@ import java.util.Arrays;
     /*
         查看发布的任务 未登录用户只能查看10条记录
      */
-    @GetMapping("/searchTaskList")
-    public IPage<TaskInfo> doSearchTaskList(@RequestParam(required = false, defaultValue = "1") Integer pageSize, @RequestParam(required = false, defaultValue = "8") Integer pageNum, @RequestParam(required = false) TaskInfo taskInfo, @RequestParam(required = false) @Size(min = 1, max = 2, message = "error price interval") BigDecimal[] bePrice) {
+    @PostMapping("/searchTaskList")
+    public IPage<TaskInfo> doSearchTaskList(@RequestParam(required = false, defaultValue = "1") Integer pageSize, @RequestParam(required = false, defaultValue = "8") Integer pageNum, @RequestBody(required = false) TaskInfo taskInfo, @RequestParam(required = false) @Size(min = 1, max = 2, message = "error price interval") BigDecimal[] bePrice) {
         //todo 未登录的用户只能查看部分数据
         QueryWrapper<TaskInfo> taskInfoLambdaQueryWrapper = new QueryWrapper<>();
         if (false) {
@@ -49,10 +52,10 @@ import java.util.Arrays;
     }
 
     /*
-   发布和修改任务 一个
+   发布和修改任务一个
      */
-    @GetMapping("/pushTask")
-    public BaseResponse doPushTask(@RequestParam TaskInfo taskInfo) {
+    @PostMapping("/pushTask")
+    public BaseResponse doPushTask(@RequestBody TaskInfo taskInfo) {
         //todo 必须校验用户的登录状态
         QueryWrapper<TaskInfo> taskInfoLambdaQueryWrapper = new QueryWrapper<>();
         QueryWrapper<TaskInfo> taskId = taskInfoLambdaQueryWrapper.eq(taskInfo.getTask_id() != null, "task_id", taskInfo.getTask_id());
@@ -72,8 +75,8 @@ import java.util.Arrays;
     /*
     下架任务
      */
-    @GetMapping("/pullTask")
-    public BaseResponse doPullTask(@RequestParam TaskInfo taskInfo) {
+    @PostMapping("/pullTask")
+    public BaseResponse doPullTask(@RequestBody TaskInfo taskInfo) {
         //todo 必须校验用户的登录状态
         QueryWrapper<TaskInfo> taskInfoLambdaQueryWrapper = new QueryWrapper<>();
         QueryWrapper<TaskInfo> taskId = taskInfoLambdaQueryWrapper.eq(taskInfo.getTask_id() != null, "task_id", taskInfo.getTask_id());
@@ -90,4 +93,51 @@ import java.util.Arrays;
         return ResultUtils.success(ErrorCode.SUCCESS);
     }
 
+    /*
+    用户接受任务
+     */
+    @PostMapping("/receiveTask")
+    public BaseResponse<ErrorCode> doReceiveTask(@RequestBody TaskRequestVo taskRequestVo) {
+        if (taskRequestVo.getUserId() != null && taskRequestVo.getTask_id() != null) {
+            TaskInfo byId = taskService.getById(taskRequestVo.getTask_id());
+            if (byId != null) {
+                synchronized (taskRequestVo.getTask_id()) {
+                    TaskInfo taskInfo = new TaskInfo();
+                    taskInfo.setTask_id(taskRequestVo.getTask_id());
+                    taskInfo.setTask_price(taskRequestVo.getTask_price());
+                    taskInfo.setTask_receive_id(taskRequestVo.getUserId());
+                    taskInfo.setTask_accept_status(1);
+                    boolean b = taskService.saveOrUpdate(taskInfo);
+                    if (b) {
+                        return ResultUtils.success(ErrorCode.SUCCESS);
+                    }
+                    return ResultUtils.error(ErrorCode.SYSTEM_ERROR);
+                }
+            }
+        }
+        throw new BusinessException(ErrorCode.NULL_ERROR);
+    }
+
+    /*
+    用户取消任务
+     */
+    @PostMapping("/quitTask")
+    public BaseResponse<ErrorCode> doQuitTask(@RequestBody TaskRequestVo taskRequestVo) {
+        if (taskRequestVo.getUserId() != null && taskRequestVo.getTask_id() != null) {
+            TaskInfo byId = taskService.getById(taskRequestVo.getTask_id());
+            if (byId != null) {
+                synchronized (taskRequestVo.getTask_id()) {
+                    TaskInfo taskInfo = new TaskInfo();
+                    taskInfo.setTask_receive_id(null);
+                    taskInfo.setTask_accept_status(0);
+                    boolean b = taskService.updateById(taskInfo);
+                    if (b) {
+                        return ResultUtils.success(ErrorCode.SUCCESS);
+                    }
+                    return ResultUtils.error(ErrorCode.SYSTEM_ERROR);
+                }
+            }
+        }
+        throw new BusinessException(ErrorCode.NULL_ERROR);
+    }
 }

@@ -1,4 +1,4 @@
-```sql
+```
 create table Task_info
 (
     task_id            varchar(255) not null primary key unique comment '任务id',
@@ -11,6 +11,7 @@ create table Task_info
     task_end_time      DateTime     Null comment '任务结束时间' on update current_timestamp,
     task_status        tinyint(1)            default 0 not null comment '0 --未接受 1-- 已接受',
     task_receive_name  varchar(20)  Null comment '任务接收人姓名',
-    task_receive_id    varchar(255) Null comment '任务接收人id'
+    task_receive_id    varchar(255) Null comment '任务接收人id',
+    task_push_id    varchar(255) Null comment '任务发布人id',
 ) engine = Innodb;
 ```
