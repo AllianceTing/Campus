@@ -14,7 +14,8 @@
         <module>pluins</module>
         <module>ToBService</module>
         <module>support</module>
-      <module>AntD</module>
+        <module>cronTab</module>
+        <module>Task</module>
     </modules>
     <groupId>com.compus</groupId>
     <artifactId>Campus</artifactId>

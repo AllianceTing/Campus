@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import javax.mail.MessagingException;
 
 /**
  * PROJECT_NAME TestController
@@ -17,8 +18,9 @@ public class TestController {
     @Resource
     ProducerSendSerivce producerSendSerivce;
 
+
     @GetMapping("/producer")
-    public void TestKafkaController() {
-        producerSendSerivce.sendAsyncMail("18080266036");
+    public void TestKafkaController() throws MessagingException {
+        producerSendSerivce.sendAsyncMail("2426446427@qq.com");
     }
 }

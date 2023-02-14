@@ -25,7 +25,7 @@ public class doSendMessageService {
     @Value("${message.SmsMessageTempCode}")
     String SmsMessageTempCode;
 
-    public void smsSendMessage(String Phone) throws Exception {
+    public boolean smsSendMessage(String Phone) throws Exception {
         int smsCode = (int) (Math.random() * 9 + 1000);
         com.aliyun.dysmsapi20170525.Client client = createClient(AccessKeyId, AccessSecret);
         SendSmsRequest request = new SendSmsRequest();
@@ -42,11 +42,13 @@ public class doSendMessageService {
             SendSmsResponse sendSmsResponse = client.sendSms(request);
             Integer statusCode = sendSmsResponse.getStatusCode();
             System.out.println(statusCode);
+            return true;
         } catch (ClientException e) {
             System.out.println("ErrCode:" + e.getErrCode());
             System.out.println("ErrMsg:" + e.getErrMsg());
             System.out.println("RequestId:" + e.getRequestId());
         }
+        return false;
     }
 
     public static com.aliyun.dysmsapi20170525.Client createClient(final String accessKeyId, final String accessKeySecret) throws Exception {

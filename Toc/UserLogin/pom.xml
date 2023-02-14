@@ -113,6 +113,11 @@
             <artifactId>redisson</artifactId>
             <version>3.16.0</version>
         </dependency>
+        <dependency>
+            <groupId>com.compus</groupId>
+            <artifactId>Producer</artifactId>
+            <version>V1.0.0-RC</version>
+        </dependency>
     </dependencies>
 
     <build>

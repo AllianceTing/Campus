@@ -28,13 +28,20 @@ public class ConsumerServiceIMPL {
         String value = record.value();
         System.out.println(value);
         // 比对下这个类型的bean
-        doSendMailService.doProducerSendMail();
+        if (value != null && value.length() > 0 && value.length() < 18) {
+            doSendMailService.doProducerSendMail(value);
+        }
     }
 
     @KafkaListener(topics = {TopicKEYS.MESSAGE_TOPIC})
     public void doConsumeKafkaMessage(ConsumerRecord<String, String> record) throws Exception {
         String value = record.value();
-        //todo 此处的phone 是record里取出来的
-        doSendMessageService.smsSendMessage("18080266036");
+        // 比对下这个类型的bean
+        if (value != null && value.length() > 0 && value.length() < 12) {
+            boolean b = doSendMessageService.smsSendMessage(value);
+            if (!b) {
+                throw new IllegalAccessException("SendMessage Error");
+            }
+        }
     }
 }

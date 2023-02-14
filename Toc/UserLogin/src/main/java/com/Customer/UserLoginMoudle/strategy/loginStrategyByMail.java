@@ -5,6 +5,7 @@ import com.Customer.PO.User;
 import com.Customer.UserLoginMoudle.PiplineValidate.PipelineExcutor;
 import com.Customer.UserLoginMoudle.PiplineValidate.UserLoginReuestContent;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.producer.Service.ProducerSendSerivce;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;

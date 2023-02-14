@@ -3,8 +3,6 @@ package com.producer.Service;
 import com.producer.KEY.CallBackKEYS;
 import com.producer.KEY.ProducerKEYS;
 import com.producer.KEY.TopicKEYS;
-import org.apache.kafka.common.header.Header;
-import org.apache.kafka.common.header.internals.RecordHeader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -13,9 +11,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.concurrent.ListenableFutureCallback;
 
 import javax.annotation.Resource;
-import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * PROJECT_NAME ProducerSendServiceIMPL
@@ -31,9 +26,8 @@ public class ProducerSendServiceIMPL implements ProducerSendSerivce {
     private final Logger logger = LoggerFactory.getLogger(ProducerSendServiceIMPL.class);
 
     public void sendAsyncMail(String UKey) {
-//        Properties properties = mailHeadTemp.doProducerSendMail();
-        List<Header> headers = Arrays.asList(new RecordHeader(TopicKEYS.MAIL_TOPIC, UKey.getBytes(StandardCharsets.UTF_8)));
-        kafkaTemplate.send(TopicKEYS.MAIL_TOPIC, UKey, headers.toString()).addCallback(new ListenableFutureCallback<>() {
+        String concat = UKey.concat("mail");
+        kafkaTemplate.send(TopicKEYS.MAIL_TOPIC, concat, UKey).addCallback(new ListenableFutureCallback<>() {
             @Override
             public void onFailure(Throwable ex) {
                 logger.error(CallBackKEYS.SUCCESS_KEY, ex.fillInStackTrace());
