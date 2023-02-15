@@ -10,10 +10,7 @@ import com.compus.Exception.ResultUtils;
 import com.compus.Request.TaskRequestVo;
 import com.compus.domain.TaskInfo;
 import com.compus.service.TaskService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.validation.constraints.Size;
@@ -140,4 +137,42 @@ import java.util.Arrays;
         }
         throw new BusinessException(ErrorCode.NULL_ERROR);
     }
+
+    /*
+    查看自己发布的任务
+     */
+    @GetMapping("/QueryMyselfTask")
+    public BaseResponse<Page<TaskInfo>> doQueryMyselfTask(@RequestParam String UId) {
+        if (UId != null) {
+            //todo rpc 远程调用UserService.getById()
+            var myUser = "1";
+            if (myUser != null) {
+                QueryWrapper<TaskInfo> taskInfoLambdaQueryWrapper = new QueryWrapper<>();
+                taskInfoLambdaQueryWrapper.eq("task_push_id", UId);
+                Page<TaskInfo> page = taskService.page(new Page<>(), taskInfoLambdaQueryWrapper);
+                return ResultUtils.success(page);
+            }
+        }
+        throw new BusinessException(ErrorCode.NULL_ERROR);
+    }
+
+    /*
+    客户查看自己接受的任务
+    */
+    @GetMapping("/QueryAcceptTask")
+    public BaseResponse<Page<TaskInfo>> doQueryAcceptTask(@RequestParam String UId) {
+        if (UId != null) {
+            //todo rpc 远程调用UserService.getById()
+            var myUser = "1";
+            if (myUser != null) {
+                QueryWrapper<TaskInfo> taskInfoLambdaQueryWrapper = new QueryWrapper<>();
+                taskInfoLambdaQueryWrapper.eq("task_accept_id", UId);
+                taskInfoLambdaQueryWrapper.eq("task_accept_status", 0);
+                Page<TaskInfo> page = taskService.page(new Page<>(), taskInfoLambdaQueryWrapper);
+                return ResultUtils.success(page);
+            }
+        }
+        throw new BusinessException(ErrorCode.NULL_ERROR);
+    }
+
 }
